@@ -1185,23 +1185,24 @@
     }
 
     .news-popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      box-sizing: border-box;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      overflow-y: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;  /*  추가 */
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        overflow-y: auto;  /*  추가 */
+        overflow-x: hidden;  /*  추가 */
     }
 
     .news-popup.show {
@@ -1211,14 +1212,18 @@
 
     .popup-content {
       background-color: rgba(30, 30, 30, 0.95);
-      max-width: 1600px;
+      max-width: min(1200px, calc(100vw - 40px));  /*  수정 */
       width: 100%;
+      max-height: calc(100vh - 40px);  /*  추가 */
+      min-height: 300px;  /*  추가 */
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
-      margin: 40px 0;
+      margin: 20px 0;  /*  추가 */
       border-top: 3px solid var(--theme-primary);
+      display: flex;  /*  추가 */
+      flex-direction: column;  /*  추가 */
     }
 
     .popup-close {
@@ -1262,6 +1267,7 @@
       width: 100%;
       position: relative;
       background-color: rgba(0, 0, 0, 0.7);
+      flex: 0 0 auto;
     }
 
     .gallery-container {
@@ -1271,6 +1277,7 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       padding: 20px 0;
+      height: clamp(250px, 40vh, 400px);
     }
 
     .gallery-container::-webkit-scrollbar {
@@ -1343,7 +1350,10 @@
     }
 
     .popup-details {
+      flex: 1;  /*  추가 - 남은 공간 모두 사용 */
       padding: 20px;
+      overflow-y: auto;  /*  추가 - 스크롤 가능 */
+      min-height: 200px;
     }
 
     .popup-title {
@@ -1462,6 +1472,53 @@
 
       .research-popup-body {
         padding: 20px;
+      }
+    }
+    @media (orientation: landscape) and (max-height: 600px) {
+      .popup-content {
+        max-width: calc(100vw - 20px);
+        max-height: calc(100vh - 20px);
+        margin: 10px 0;
+      }
+
+      .gallery-container {
+        height: clamp(200px, 30vh, 300px);
+      }
+
+      .popup-title {
+        font-size: 1.5rem;
+      }
+
+      .popup-details {
+        padding: 15px;
+      }
+    }
+
+    /* 🔧 추가: 매우 넓은 화면 대응 */
+    @media (min-width: 1400px) {
+      .popup-content {
+        max-width: 1200px;
+      }
+    }
+
+    /* 🔧 추가: 매우 낮은 화면 (가로 모드) */
+    @media (max-height: 500px) {
+      .popup-content {
+        max-height: calc(100vh - 10px);
+        margin: 5px 0;
+      }
+
+      .gallery-container {
+        height: clamp(120px, 25vh, 200px);
+      }
+
+      .popup-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+
+      .popup-details {
+        padding: 15px;
       }
     }
     
@@ -1960,7 +2017,7 @@
           `;
           
           // CSV 파일 로드
-          const response = await fetch('News.csv');
+          const response = await fetch('news.csv');
           const csvText = await response.text();
           
           // CSV 파싱 (간단한 파서 구현)
