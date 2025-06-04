@@ -781,7 +781,7 @@
   <!-- 연락처 -->
   <section id="media" class="animate-section">
     <div class="media-container">
-      <a href="https://medium.com/@onarcher" target="_blank" class="media-link">
+      <a href="https://medium.com/" target="_blank" class="media-link">
         <img src="Medium.png" alt="Medium" class="media-icon" title="Visit our Medium blog">
       </a>
     </div>
@@ -1529,6 +1529,51 @@
     section:nth-of-type(even) {
       background-color: rgba(50, 50, 50, 0.7) !important;
     }
+
+    /* 기존 CSS 스타일 뒤에 추가할 코드 */
+
+    /* 기본 카드 스타일 (1번, 3번) */
+    .research-topic-item:nth-child(2) {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    /* 중간 섹션만 특별하게 */
+    .research-topic-item:nth-child(1),
+    .research-topic-item:nth-child(3) {
+      background: linear-gradient(135deg, 
+        rgba(255, 20, 147, 0.1) 0%, 
+        rgba(255, 69, 180, 0.05) 100%);
+      border: 1px solid rgba(255, 20, 147, 0.2);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 20px 0;
+      box-shadow: 0 8px 32px rgba(255, 20, 147, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    /* 호버 효과 */
+    .research-topic-item:nth-child(2):hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .research-topic-item:nth-child(1):hover,
+    .research-topic-item:nth-child(3):hover {
+      background: linear-gradient(135deg, 
+        rgba(255, 20, 147, 0.15) 0%, 
+        rgba(255, 69, 180, 0.08) 100%);
+      border-color: rgba(255, 20, 147, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 20, 147, 0.25);
+    }
+    
 	</style>
   
   <!-- 자바스크립트 코드 -->
@@ -2017,7 +2062,7 @@
           `;
           
           // CSV 파일 로드
-          const response = await fetch('News.csv');
+          const response = await fetch('news.csv');
           const csvText = await response.text();
           
           // CSV 파싱 (간단한 파서 구현)
