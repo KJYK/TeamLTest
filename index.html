@@ -512,17 +512,17 @@
       <!-- Human Sensing Research Topic -->
       <div class="research-topic-item">
         <div class="research-content">
-          <div class="research-badge">Human Sensing</div>
-          <h2 class="research-title">Human Behavioral Sensing</h2>
+          <div class="research-badge">Data Collecting</div>
+          <h2 class="research-title">Human Sensing</h2>
           <p class="research-description">
-            Revolutionizing how we understand human behavior through intelligent mobile sensing and personalized feedback systems.
+            We comprehensively collect and integrate multimodal data including biosignals, video, and audio to holistically understand human behavior and cognitive processes.
           </p>
           <div class="research-features">
             <h4>Key Capabilities</h4>
             <ul>
-              <li>Real-time behavioral pattern recognition</li>
-              <li>Contextual awareness through mobile sensors</li>
-              <li>Personalized wellness interventions</li>
+              <li>Real-time multimodal data</li>
+              <li>Audio-visual behavioral data</li>
+              <li>Survey-based data integration</li>
             </ul>
           </div>
           <button class="learn-more-btn" data-research="human-sensing">Learn more</button>
@@ -536,16 +536,16 @@
       <div class="research-topic-item">
         <div class="research-content">
           <div class="research-badge">Data Analysis</div>
-          <h2 class="research-title">Data Analysis</h2>
+          <h2 class="research-title">Pattern Discovery & Anomaly Detection</h2>
           <p class="research-description">
-            Advanced wearable technology that monitors your health metrics in real-time, providing actionable insights for better living.
+            We discover hidden patterns and accurately detect abnormal behaviors or states through AI-based analysis of collected multimodal data.
           </p>
           <div class="research-features">
             <h4>Key Capabilities</h4>
             <ul>
-              <li>Continuous health monitoring</li>
-              <li>AI-powered pattern analysis</li>
-              <li>Predictive health insights</li>
+              <li>AI-powered pattern recognition algorithms</li>
+              <li>Real-time anomaly detection systems</li>
+              <li>Personalized baseline anomaly detection</li>
             </ul>
           </div>
           <button class="learn-more-btn" data-research="data-analysis">Learn more</button>
@@ -558,17 +558,17 @@
       <!-- Intervention Design Research Topic -->
       <div class="research-topic-item">
         <div class="research-content">
-          <div class="research-badge">Intervention Design</div>
+          <div class="research-badge">Solution Development</div>
           <h2 class="research-title">Intervention Design</h2>
           <p class="research-description">
-            Comprehensive physiological data analysis platform that transforms raw health data into meaningful medical insights.
+            We design personalized intervention strategies based on data analysis results and scientifically validate their effectiveness to provide optimal solutions.
           </p>
           <div class="research-features">
             <h4>Key Capabilities</h4>
             <ul>
-              <li>Multi-parameter health tracking</li>
-              <li>Advanced EDA analysis</li>
-              <li>Clinical-grade data visualization</li>
+              <li>Personalized intervention design</li>
+              <li>Real-time adaptive intervention systems</li>
+              <li>Experimental validation methods</li>
             </ul>
           </div>
           <button class="learn-more-btn" data-research="intervention">Learn more</button>
@@ -600,7 +600,7 @@
           </ul>
         </div>
         <div class="research-popup-applications" id="research-popup-applications">
-          <h4>Applications</h4>
+          <h4>Related Projects</h4>
           <p id="research-popup-applications-text">
             <!-- 응용 분야가 동적으로 로드됩니다 -->
           </p>
@@ -1185,24 +1185,24 @@
     }
 
     .news-popup {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;  /*  추가 */
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        box-sizing: border-box;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        overflow-y: auto;  /*  추가 */
-        overflow-x: hidden;  /*  추가 */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* 중앙 정렬 강화 */
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .news-popup.show {
@@ -1212,18 +1212,18 @@
 
     .popup-content {
       background-color: rgba(30, 30, 30, 0.95);
-      max-width: min(1200px, calc(100vw - 40px));  /*  수정 */
+      max-width: min(1200px, calc(100vw - 40px));
       width: 100%;
-      max-height: calc(100vh - 40px);  /*  추가 */
-      min-height: 300px;  /*  추가 */
+      max-height: calc(95vh - 40px); /* 95vh로 여유 공간 확보 */
+      min-height: 300px;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
-      margin: 20px 0;  /*  추가 */
+      margin: auto; /* 상하 중앙 정렬 */
       border-top: 3px solid var(--theme-primary);
-      display: flex;  /*  추가 */
-      flex-direction: column;  /*  추가 */
+      display: flex;
+      flex-direction: column;
     }
 
     .popup-close {
@@ -1264,20 +1264,28 @@
     }
 
     .popup-gallery {
-      width: 100%;
+      width: auto;
       position: relative;
       background-color: rgba(0, 0, 0, 0.7);
       flex: 0 0 auto;
+      max-height: 50%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
+    .popup-gallery.hidden {
+      display: none !important;
+    }
     .gallery-container {
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      padding: 20px 0;
-      height: clamp(250px, 40vh, 400px);
+      padding: 10px 0 0 0; /* 하단 패딩 제거 */
+      flex: 1; /* 남은 공간 모두 사용 */
+      min-height: 0;
     }
 
     .gallery-container::-webkit-scrollbar {
@@ -1285,21 +1293,35 @@
     }
 
     .gallery-item {
-      flex: 0 0 auto;
+      flex: 0 0 100%; /* 명시적으로 100% 설정 */
       width: 100%;
-      height: 400px;
+      height: 100%;
       scroll-snap-align: center;
-      padding: 0 10px;
+      padding: 30px;
       box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* 넘치는 부분 숨김 */
     }
 
     .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 5px;
-    }
+      /* ❌ 이걸 없애세요
+      width: auto !important;
+      height: 85% !important;
+      */
 
+      /* ✅ 이미지 박스(요소) 자체를 .gallery-item 크기에 100% 채우고 */
+      width : 100%;
+      height: 100%;
+
+      /*    그 안에서 잘리지 않게 비율대로 축소합니다. */
+      object-fit    : contain;
+      object-position: center;
+
+      display: block;
+      margin: 0;
+    }
     .gallery-nav {
       position: absolute;
       top: 50%;
@@ -1331,22 +1353,33 @@
     .gallery-dots {
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
+      padding: 15px 0; /* 패딩 추가로 공간 확보 */
+      background-color: rgba(0, 0, 0, 0.7); /* 배경색으로 구분 */
+      flex-shrink: 0; /* 크기 고정 */
+      position: relative;
+      z-index: 10;
     }
 
     .gallery-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px; /* 크기 약간 증가 */
+      height: 12px;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.3);
-      margin: 0 5px;
+      background-color: rgba(255, 255, 255, 0.4);
+      margin: 0 6px; /* 간격 약간 증가 */
       cursor: pointer;
       transition: all 0.3s ease;
+      border: 2px solid transparent; /* 테두리 추가 */
     }
 
     .gallery-dot.active {
       background-color: var(--theme-primary);
-      transform: scale(1.2);
+      transform: scale(1.3); /* 크기 증가 */
+      border-color: rgba(255, 255, 255, 0.3); /* 활성화 시 테두리 */
+    }
+
+    .gallery-dot:hover {
+      background-color: rgba(255, 255, 255, 0.7);
+      transform: scale(1.1);
     }
 
     .popup-details {
@@ -1354,6 +1387,7 @@
       padding: 20px;
       overflow-y: auto;  /*  추가 - 스크롤 가능 */
       min-height: 200px;
+      max-height: none; 
     }
 
     .popup-title {
@@ -1427,10 +1461,6 @@
         height: 200px;
       }
 
-      .gallery-item {
-        height: 300px;
-      }
-
       .popup-title {
         font-size: 1.5rem;
       }
@@ -1449,12 +1479,28 @@
       .research-popup-body {
         padding: 25px;
       }
+
+      .gallery-container {
+        height: clamp(150px, 25vh, 250px); /* 모바일에서 더 작게 */
+        max-height: 40vh; /* 모바일에서는 40% 제한 */
+      }
+
+      .gallery-dots {
+        padding: 12px 0;
+      }
+      
+      .gallery-dot {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+      }
+      
+      .gallery-dot.active {
+        transform: scale(1.2);
+      }
     }
 
     @media (max-width: 480px) {
-      .gallery-item {
-        height: 200px;
-      }
 
       .gallery-nav {
         width: 30px;
@@ -1473,6 +1519,22 @@
       .research-popup-body {
         padding: 20px;
       }
+      
+      .gallery-container {
+        height: clamp(120px, 20vh, 200px); /* 더 작은 화면에서 더욱 작게 */
+        max-height: 35vh;
+      }
+
+        .gallery-dots {
+        padding: 10px 0;
+      }
+      
+      .gallery-dot {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+      }
+      
     }
     @media (orientation: landscape) and (max-height: 600px) {
       .popup-content {
@@ -1492,12 +1554,18 @@
       .popup-details {
         padding: 15px;
       }
+
     }
 
     /* 🔧 추가: 매우 넓은 화면 대응 */
     @media (min-width: 1400px) {
       .popup-content {
         max-width: 1200px;
+        max-height: min(800px, calc(90vh - 40px));
+      }
+
+      .popup-gallery {
+        max-height: 45%; /* 넓은 화면에서 이미지 비율 더 줄임 */
       }
     }
 
@@ -1508,9 +1576,6 @@
         margin: 5px 0;
       }
 
-      .gallery-container {
-        height: clamp(120px, 25vh, 200px);
-      }
 
       .popup-title {
         font-size: 1.4rem;
@@ -1521,7 +1586,7 @@
         padding: 15px;
       }
     }
-    
+
     section:nth-of-type(odd) {
       background-color: rgba(0, 0, 0, 0.7) !important;
     }
@@ -1583,40 +1648,37 @@
       const researchData = {
         'human-sensing': {
           title: 'Human Sensing',
-          subtitle: 'Advanced Mobile & Behavioral Analytics',
-          description: 'Our human sensing research focuses on developing cutting-edge mobile sensing technologies and behavioral analytics systems to monitor human behavior, mood patterns, and contextual information in real-time. We leverage smartphone sensors, wearable devices, and AI algorithms to capture comprehensive human activity and emotional state data for personalized wellness interventions.',
+          subtitle: 'From Human to Data', //Data Collecting with Wearable Sensors
+          description: 'We develop multimodal data collection systems to understand complex human behavioral patterns and psychological states. We simultaneously capture high-resolution video and audio data alongside multi-channel biosignals, enabling continuous monitoring in real-life contexts through user-friendly wearable devices. The reliability of our measurements is ensured through survey-based self-report data integration.',
           features: [
-            'Real-time behavioral pattern recognition through mobile sensing',
-            'Contextual mood and activity tracking using smartphone sensors',
-            'Personalized wellness recommendations and interventions',
-            'Privacy-preserving data collection and processing techniques',
-            'Smart notification systems for behavioral nudging'
+            'Real-time multimodal data synchronization',
+            "Natural data collection through lightweight sensors that don't interfere with daily life",
+            'Personalized data collection methodologies tailored to individual characteristics and environments',
+            'Data reliability assurance through cross-validation of objective measurements and subjective assessments',
+            'Consistent data collection framework across controlled laboratory and real-life environments'
           ],
-          applications: 'Mental health monitoring, personalized wellness apps, digital therapeutics, behavioral intervention systems, and context-aware mobile applications.'
+          applications: 'Team Cohesion, Remote work'
         },
         'data-analysis': {
-          title: 'Data Analysis',
-          subtitle: 'Physiological Intelligence & Health Monitoring',
-          description: 'We develop sophisticated wearable technology solutions that continuously monitor vital health metrics including heart rate, respiratory patterns, and stress indicators. Our advanced sensor fusion and AI-powered analysis provide real-time health insights and early warning systems for various physiological conditions.',
+          title: 'Pattern Discovery & Intervention Design',
+          subtitle: 'From Data to Insight', //AI Based Data Analysis
+          description: 'We apply AI-based analysis to collected behavioral data to detect complex patterns and anomalies. We objectively measure and quantify abstract concepts such as team cohesion and social bonds through biosignals and behavioral indicators. Through cross-analysis with self-assessment survey results, we identify individuals or groups experiencing potential issues at an early stage and accurately determine situations requiring intervention. This comprehensive analytical framework establishes a foundation for scientifically understanding and predicting complex human psychological and social states.',
           features: [
-            'Continuous multi-parameter health monitoring (HR, breathing, stress)',
-            'Advanced sensor fusion for accurate physiological measurements',
-            'Real-time health anomaly detection and alerting',
-            'Long-term health trend analysis and predictions',
-            'Medical-grade data accuracy with consumer-friendly wearables'
+            'AI-powered pattern recognition algorithms for complex behavioral data analysis',
+            'Objective quantification of abstract social concepts through biosignal integration',
+            'Cross-validation framework combining objective measurements with subjective assessments',
           ],
-          applications: 'Preventive healthcare, fitness optimization, chronic disease management, elderly care monitoring, and clinical research applications.'
+          applications: 'Team Cohesion, Social Bonds in Remote Work'
         },
         'intervention': {
           title: 'Intervention Design',
-          subtitle: 'Clinical Data Analytics & Medical Intelligence',
-          description: 'Our intervention design research focuses on comprehensive physiological data analysis platforms that transform raw health monitoring data into actionable medical insights. We develop clinical-grade visualization tools, predictive analytics, and decision support systems for healthcare professionals and researchers.',
+          subtitle: 'From Insight to Action',
+          description: 'We design personalized intervention strategies based on data analysis results. We develop intervention messages that integrate psychological principles such as social norms to simultaneously stimulate internal motivation for self-reflection and external behavioral changes such as helping behaviors. All developed intervention methods are rigorously validated for their applicability and effectiveness not only in laboratory environments but also in real-world settings, with the goal of providing practical and sustainable solutions.',
           features: [
-            'Multi-parameter physiological data integration and analysis',
-            'Advanced EDA (Electrodermal Activity) signal processing',
-            'Clinical-grade data visualization and reporting tools',
-            'Predictive modeling for health outcome forecasting',
-            'Healthcare decision support system integration'
+            'Personalized intervention design based on individual data patterns',
+            'Psychology-driven messaging using social norms and behavioral principles',
+            'Dual-target approach for internal motivation and external behavior change',
+            'Real-world validation testing for practical effectiveness'
           ],
           applications: 'Clinical diagnostics, medical research platforms, healthcare decision support, patient monitoring systems, and biomedical data analytics.'
         }
@@ -2048,7 +2110,7 @@
       // 뉴스 데이터 글로벌 변수
       let newsData = [];
       
-      // 뉴스 CSV 파일 로드 및 파싱
+      // 뉴스 JSON 파일 로드
       async function loadNewsData() {
         try {
           // 로딩 인디케이터 표시
@@ -2061,103 +2123,48 @@
             </tr>
           `;
           
-          // CSV 파일 로드
-          const response = await fetch('News.csv');
-          const csvText = await response.text();
+          // JSON 파일 로드
+          const response = await fetch('News.json');
           
-          // CSV 파싱 (간단한 파서 구현)
-          newsData = parseNewsCSV(csvText);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          newsData = await response.json();
+          
+          // 인덱스로 내림차순 정렬 (최신순)
+          newsData.sort((a, b) => b.index - a.index);
           
           // 뉴스 데이터로 UI 초기화
           initializeNewsUI(newsData);
         } catch (error) {
           console.error('Error loading news data:', error);
-          document.getElementById('news-table-body').innerHTML = `
-            <tr>
-              <td colspan="2">
-                <p style="text-align: center; padding: 20px;">Error loading news data. Please try again later.</p>
-                <button id="retry-news-btn" class="pub-category-btn" style="display: block; margin: 0 auto;">Retry</button>
-              </td>
-            </tr>
-          `;
           
-          // 재시도 버튼 이벤트 리스너
-          document.getElementById('retry-news-btn').addEventListener('click', loadNewsData);
+          // 에러 시 기본 데이터 사용
+          console.log('JSON 파일 로드에 실패했습니다. 기본 뉴스 데이터를 사용합니다.');
+          newsData = getDefaultNewsData();
+          initializeNewsUI(newsData);
         }
       }
 
-      // 뉴스 CSV 파서 구현
-      function parseNewsCSV(csvText) {
-        const lines = csvText.split('\n');
-        const headers = lines[0].split(',').map(header => header.trim());
-        
-        const result = [];
-        
-        for (let i = 1; i < lines.length; i++) {
-          if (!lines[i].trim()) continue;
-          
-          // CSV 파싱 (쉼표 내의 대괄호 내용 보존)
-          const values = [];
-          let inBrackets = false;
-          let currentValue = '';
-          
-          // 각 문자를 순회하며 CSV 파싱
-          for (let j = 0; j < lines[i].length; j++) {
-            const char = lines[i][j];
-            
-            if (char === '[') {
-              inBrackets = true;
-              currentValue += char;
-            } else if (char === ']') {
-              inBrackets = false;
-              currentValue += char;
-            } else if (char === ',' && !inBrackets) {
-              values.push(currentValue.trim());
-              currentValue = '';
-            } else {
-              currentValue += char;
-            }
+      // 기본 뉴스 데이터 (JSON 파일이 없을 경우 사용)
+      function getDefaultNewsData() {
+        return [
+          {
+            "index": 1,
+            "title": "Korean Military Manpower Administration visited TeamL!",
+            "content": "The Military Manpower Administration (MMA) of South Korea visited TeamL, where they attended a lecture by Dr. Lee on his research and the application of artificial intelligence at The Michael Spence Building. In addition, they engaged in in-depth discussions on how AI and TeamL's research could be applied to the operations of the MMA. This visit served as a meaningful opportunity to explore the practical integration of AI technologies and research in the field of public administration. Moving forward, TeamL will continue to collaborate with the MMA and other institutions to develop AI-driven innovative solutions and contribute to the creation of social value.",
+            "date": "20250423",
+            "images": ["News/New7/KoreanMMA.jpg", "News/New7/USYD.jpg"]
+          },
+          {
+            "index": 2,
+            "title": "TeamL Research Presentation at International AI Conference",
+            "content": "TeamL members presented their latest research findings on human behavior analysis and intervention design at the prestigious International AI Conference. The presentation showcased innovative approaches to multimodal data collection and real-time pattern recognition.",
+            "date": "20250315",
+            "images": ["placeholder.jpg"]
           }
-          
-          // 마지막 값 추가
-          if (currentValue) {
-            values.push(currentValue.trim());
-          }
-          
-          const entry = {};
-          
-          headers.forEach((header, index) => {
-            let value = values[index] ? values[index] : '';
-            
-            // 인덱스는 숫자로 변환
-            if (header === 'index') {
-              value = parseInt(value, 10);
-            } 
-            // 이미지 경로 배열 파싱
-            else if (header.trim().toLowerCase() === 'images') {
-              // 원본 값
-              let str = value.trim().replace(/^["']|["']$/g, '');
-
-              // 대괄호가 있으면 떼고, 없으면 그대로
-              str = str.replace(/^\[|\]$/g, '');
-
-              // 쉼표 기준으로 잘라내되, 앞뒤 공백까지 제거
-              const paths = str
-                  .split(/\s*,\s*/)
-                  .filter(p => p.length > 0);
-
-              console.log('파싱된 이미지 경로:', paths);
-              value = paths;
-            }
-            
-            entry[header] = value;
-          });
-          
-          result.push(entry);
-        }
-        
-        // 인덱스 기준 내림차순 정렬 (최신순)
-        return result.sort((a, b) => b.index - a.index);
+        ];
       }
       
       // 날짜 변환 함수: 'yyyymmdd' -> 'dd Month yyyy'
@@ -2340,6 +2347,10 @@
           galleryContainer.innerHTML = '';
           galleryDots.innerHTML = '';
           
+          // 갤러리 섹션 초기화 (항상 먼저 보이게 설정)
+          const gallerySection = document.querySelector('.popup-gallery');
+          gallerySection.style.display = 'block';
+          
           // 타이틀, 날짜, 내용 설정
           popupTitle.textContent = newsItem.title;
           popupDate.textContent = formatDate(newsItem.date);
@@ -2373,14 +2384,21 @@
             
             let currentImageIndex = 0;
             
-            prevBtn.addEventListener('click', function() {
+            // 기존 이벤트 리스너 제거 (중복 방지)
+            prevBtn.replaceWith(prevBtn.cloneNode(true));
+            nextBtn.replaceWith(nextBtn.cloneNode(true));
+            
+            const newPrevBtn = document.getElementById('gallery-prev');
+            const newNextBtn = document.getElementById('gallery-next');
+            
+            newPrevBtn.addEventListener('click', function() {
               if (currentImageIndex > 0) {
                 currentImageIndex--;
                 scrollToImage(currentImageIndex);
               }
             });
             
-            nextBtn.addEventListener('click', function() {
+            newNextBtn.addEventListener('click', function() {
               if (currentImageIndex < newsItem.images.length - 1) {
                 currentImageIndex++;
                 scrollToImage(currentImageIndex);
@@ -2424,11 +2442,15 @@
             }
           } else {
             // 이미지가 없는 경우 갤러리 섹션 숨김
-            document.querySelector('.popup-gallery').style.display = 'none';
+            gallerySection.style.display = 'none';
           }
           
           // 팝업 표시
           popup.classList.add('show');
+          
+          // 기존 이벤트 리스너 제거 후 새로 추가 (중복 방지)
+          const closeBtn = document.getElementById('popup-close');
+          closeBtn.replaceWith(closeBtn.cloneNode(true));
           
           // 팝업 닫기 버튼 이벤트
           document.getElementById('popup-close').addEventListener('click', function() {
