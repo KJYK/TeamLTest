@@ -7,22 +7,22 @@
   <style>
     /* 테마 색상 변수 정의 */
     :root {
-      --theme-primary: #ff1493;
-      --theme-primary-light: #ff69b4;
-      --theme-primary-dark: #c71585;
-      --theme-primary-transparent: rgba(255, 20, 147, 0.8);
-      --theme-primary-very-transparent: rgba(255, 20, 147, 0.3);
-      --theme-bg-dark: rgba(0, 0, 0, 0.7);
-      --theme-bg-darker: rgba(20, 20, 20, 0.7);
-      --theme-text: #fff;
-      --theme-text-light: rgba(255, 255, 255, 0.8);
+      --theme-primary: #007AFF;
+      --theme-primary-light: #4A90E2;
+      --theme-primary-dark: #0051D5;
+      --theme-primary-transparent: rgba(0, 122, 255, 0.8);
+      --theme-primary-very-transparent: rgba(0, 122, 255, 0.3);
+      --theme-bg-dark: rgba(248, 248, 248, 0.95);
+      --theme-bg-darker: rgba(255, 255, 255, 0.95);
+      --theme-text: #1D1D1F;
+      --theme-text-light: rgba(29, 29, 31, 0.7);
     }
     
     /* 기본 레이아웃 */
     body {
       margin: 0px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      background-color: #F5F5F7;
       color: var(--theme-text);
       overflow-x: hidden;
     }
@@ -35,11 +35,11 @@
     
     /* 짝수/홀수 섹션 배경색 */
     section:nth-of-type(odd) {
-      background-color: var(--theme-bg-dark) !important;
+      background-color: rgba(255, 255, 255, 0.8) !important;
     }
 
     section:nth-of-type(even) {
-      background-color: var(--theme-bg-darker) !important;
+      background-color: rgba(248, 248, 248, 0.8) !important;
     }
     
     /* 히어로 이미지 */
@@ -62,27 +62,28 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.6);
       z-index: 0;
     }
     
     #hero .overlay-text h1 {
-      margin: 0;
-      font-size: 1.5rem;
-      line-height: 1.2;
+      font-size: clamp(1.8rem, 5vw, 6rem);
+      background: linear-gradient(135deg, #1d1d1f, #6e6e73);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    
+
     #hero .overlay-text h2 {
-      margin-top: 10px;
-      font-size: 1rem;
-      opacity: 0.9;
+      font-size: clamp(1.1rem, 2.5vw, 2.5rem);
+      color: var(--theme-text-light);
     }
     
     /* Apple-style Research Topics */
     .research-topics-section {
-      background: #000;
+      background: #F5F5F7;
       padding: 80px 0;
-      min-height: 100vh;
+      min-height: 70vh;
     }
 
     .research-topics-container {
@@ -94,8 +95,9 @@
     .research-topic-item {
       display: flex;
       align-items: center;
-      margin-bottom: 120px;
-      min-height: 80vh;
+      min-height: clamp(450px, 55vh, 700px); /* 화면 높이의 55 % 정도로 제한 */
+      margin-bottom: 60px;                  /* 카드 간 간격 절반으로 */
+      padding: 24px;
       position: relative;
     }
 
@@ -147,7 +149,7 @@
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff, #ccc);
+      background: linear-gradient(135deg, #1D1D1F, #86868B);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -157,7 +159,7 @@
     .research-description {
       font-size: 1.2rem;
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--theme-text-light);
       margin-bottom: 30px;
     }
 
@@ -182,7 +184,7 @@
       padding: 8px 0;
       padding-left: 25px;
       position: relative;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--theme-text-light);
       line-height: 1.6;
     }
 
@@ -198,13 +200,13 @@
     .learn-more-btn {
       display: inline-flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
+      background: rgba(0, 122, 255, 0.1); /* 기존: rgba(255, 255, 255, 0.1) */
+      color: var(--theme-text); /* 기존: white */
       padding: 15px 30px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 600;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(0, 122, 255, 0.2); /* 기존: rgba(255, 255, 255, 0.2) */
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
       cursor: pointer;
@@ -214,7 +216,7 @@
       background: var(--theme-primary-transparent);
       border-color: var(--theme-primary);
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3); 
     }
 
     .learn-more-btn::after {
@@ -286,7 +288,7 @@
     }
 
     .research-popup-content {
-      background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(50, 50, 50, 0.95));
+      background: linear-gradient(135deg, rgba(248, 248, 248, 0.98), rgba(255, 255, 255, 0.98));  
       max-width: min(800px, calc(100vw - 40px));
       max-height: calc(100vh - 40px);
       width: 100%;
@@ -400,7 +402,7 @@
     .research-popup-description {
       font-size: 1.1rem;
       line-height: 1.8;
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--theme-text);
       margin-bottom: 30px;
       text-align: justify;
     }
@@ -426,7 +428,7 @@
       padding: 8px 0;
       padding-left: 25px;
       position: relative;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--theme-text);
       line-height: 1.6;
     }
 
@@ -440,7 +442,7 @@
     }
 
     .research-popup-applications {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 122, 255, 0.05);
       border-radius: 15px;
       padding: 25px;
       border-left: 4px solid var(--theme-primary);
@@ -454,7 +456,7 @@
     }
 
     .research-popup-applications p {
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--theme-text-light); 
       line-height: 1.6;
       margin: 0;
     }
@@ -493,6 +495,32 @@
       opacity: 0;
       transform: translateY(-50px);
     }
+
+    /* ── Research‑Topic 카드 컴팩트 버전 ───────────────────────── */
+    .topic-card{
+      /* 바깥 여백 ↓ */
+      padding: clamp(6px, 1vw, 9px) clamp(5px, 1vw, 7px);          /* 기존 32px 24px → 20px 16px */
+      min-height: auto;            /* 불필요한 높이 강제 해제 */
+      display:flex;                /* 세로로 쌓고 */
+      flex-direction:column;
+      justify-content:flex-start;  /* 위쪽부터 채우기 */
+      gap: 12px;                   /* 요소 간 간격만 살짝 */
+    }
+
+    /* 카드 안 이미지/텍스트 간격 조정 */
+    .topic-card figure{ margin:0; }        /* 위쪽 여백 제거 */
+    .topic-card img   { max-height:160px;} /* 이미지가 너무 커지지 않게 */
+
+    /* 타이틀/태그라인 마진 축소 */
+    .topic-card h3      { margin:0 0 6px; }
+    .topic-card .tagline{ margin:0; font-size:.85rem; }
+
+    /* 데스크톱에서는 카드 폭을 줄여 높이도 함께 감소 */
+    @media (min-width:1024px){
+      .topic-card{ flex:0 0 220px; }       /* 기존 280px → 220px */
+    }
+
+    
 	</style>
 </head>
 
@@ -507,159 +535,145 @@
 
   <!-- Apple-style 연구 주제 섹션 -->
   <section id="topics" class="research-topics-section animate-section">
-    <div class="research-topics-container">
-      
-      <!-- Human Sensing Research Topic -->
-      <div class="research-topic-item">
-        <div class="research-content">
-          <div class="research-badge">Data Collecting</div>
-          <h2 class="research-title">Human Sensing</h2>
-          <p class="research-description">
-            We comprehensively collect and integrate multimodal data including biosignals, video, and audio to holistically understand human behavior and cognitive processes.
-          </p>
-          <div class="research-features">
-            <h4>Key Capabilities</h4>
-            <ul>
-              <li>Real-time multimodal data</li>
-              <li>Audio-visual behavioral data</li>
-              <li>Survey-based data integration</li>
-            </ul>
-          </div>
-          <button class="learn-more-btn" data-research="human-sensing">Learn more</button>
-        </div>
-        <div class="research-image-container">
-          <img src="ResearchTopic1.png" alt="Human Sensing" class="research-image">
-        </div>
-      </div>
-
-      <!-- Data Analysis Research Topic -->
-      <div class="research-topic-item">
-        <div class="research-content">
-          <div class="research-badge">Data Analysis</div>
-          <h2 class="research-title">Pattern Discovery & Anomaly Detection</h2>
-          <p class="research-description">
-            We discover hidden patterns and accurately detect abnormal behaviors or states through AI-based analysis of collected multimodal data.
-          </p>
-          <div class="research-features">
-            <h4>Key Capabilities</h4>
-            <ul>
-              <li>AI-powered pattern recognition algorithms</li>
-              <li>Real-time anomaly detection systems</li>
-              <li>Personalized baseline anomaly detection</li>
-            </ul>
-          </div>
-          <button class="learn-more-btn" data-research="data-analysis">Learn more</button>
-        </div>
-        <div class="research-image-container">
-          <img src="ResearchTopic2.png" alt="Data Analysis" class="research-image">
-        </div>
-      </div>
-
-      <!-- Intervention Design Research Topic -->
-      <div class="research-topic-item">
-        <div class="research-content">
-          <div class="research-badge">Solution Development</div>
-          <h2 class="research-title">Intervention Design</h2>
-          <p class="research-description">
-            We design personalized intervention strategies based on data analysis results and scientifically validate their effectiveness to provide optimal solutions.
-          </p>
-          <div class="research-features">
-            <h4>Key Capabilities</h4>
-            <ul>
-              <li>Personalized intervention design</li>
-              <li>Real-time adaptive intervention systems</li>
-              <li>Experimental validation methods</li>
-            </ul>
-          </div>
-          <button class="learn-more-btn" data-research="intervention">Learn more</button>
-        </div>
-        <div class="research-image-container">
-          <img src="ResearchTopic3.png" alt="Intervention Design" class="research-image">
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 연구 주제 팝업 -->
-  <div class="research-popup" id="research-popup">
-    <div class="research-popup-content">
-      <div class="research-popup-header">
-        <div class="research-popup-close" id="research-popup-close"></div>
-        <h2 class="research-popup-title" id="research-popup-title">Research Topic</h2>
-        <p class="research-popup-subtitle" id="research-popup-subtitle">Detailed Information</p>
-      </div>
-      <div class="research-popup-body">
-        <div class="research-popup-description" id="research-popup-description">
-          <!-- 연구 주제 설명이 동적으로 로드됩니다 -->
-        </div>
-        <div class="research-popup-features" id="research-popup-features">
-          <h4>Key Features</h4>
-          <ul id="research-popup-features-list">
-            <!-- 특징 목록이 동적으로 로드됩니다 -->
+    <div class="topics-scroll">
+      <!-- 카드 1 -->
+      <article class="topic-card" data-research="human-sensing">
+        <figure>
+          <img src="ResearchTopic1.png" alt="Human Sensing">
+        </figure>
+        <div class="topic-badge">DATA COLLECTION</div>  <!-- 이미지 아래로 이동 -->
+        <h3>Human Sensing</h3>
+        <p class="tagline">From Human to Data</p>
+        
+        <div class="key-capabilities">
+          <h4>Key Capabilities</h4>
+          <ul class="capabilities-list">
+            <li>Real-time multimodal data sync</li>
+            <li>Wearable sensor integration</li>
+            <li>Continuous health monitoring</li>
           </ul>
         </div>
-        <div class="research-popup-applications" id="research-popup-applications">
-          <h4>Related Projects</h4>
-          <p id="research-popup-applications-text">
-            <!-- 응용 분야가 동적으로 로드됩니다 -->
-          </p>
+      </article>
+
+      <!-- 카드 2 -->
+      <article class="topic-card" data-research="data-analysis">
+        <figure>
+          <img src="ResearchTopic2.png" alt="Pattern Discovery">
+        </figure>
+        <div class="topic-badge">DATA ANALYSIS</div>  <!-- 이미지 아래로 이동 -->
+        <h3>Pattern Discovery</h3>
+        <p class="tagline">From Data to Insight</p>
+        
+        <div class="key-capabilities">
+          <h4>Key Capabilities</h4>
+          <ul class="capabilities-list">
+            <li>AI-powered pattern analysis</li>
+            <li>Anomaly detection algorithms</li>
+            <li>Predictive health insights</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 카드 3 -->
+      <article class="topic-card" data-research="intervention">
+        <figure>
+          <img src="ResearchTopic3.png" alt="Intervention Design">
+        </figure>
+        <div class="topic-badge">SOLUTION DEVELOPMENT</div>  <!-- 이미지 아래로 이동 -->
+        <h3>Intervention Design</h3>
+        <p class="tagline">From Insight to Action</p>
+        
+        <div class="key-capabilities">
+          <h4>Key Capabilities</h4>
+          <ul class="capabilities-list">
+            <li>Personalized intervention design</li>
+            <li>Behavioral change strategies</li>
+            <li>Real-world validation testing</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+    <!-- 연구 주제 팝업 -->
+    <div class="research-popup" id="research-popup">
+      <div class="research-popup-content">
+        <div class="research-popup-header">
+          <div class="research-popup-close" id="research-popup-close"></div>
+          <h2 class="research-popup-title" id="research-popup-title">Research Topic</h2>
+          <p class="research-popup-subtitle" id="research-popup-subtitle">Detailed Information</p>
+        </div>
+        <div class="research-popup-body">
+          <div class="research-popup-description" id="research-popup-description">
+            <!-- 연구 주제 설명이 동적으로 로드됩니다 -->
+          </div>
+          <div class="research-popup-features" id="research-popup-features">
+            <h4>Key Features</h4>
+            <ul id="research-popup-features-list">
+              <!-- 특징 목록이 동적으로 로드됩니다 -->
+            </ul>
+          </div>
+          <div class="research-popup-applications" id="research-popup-applications">
+            <h4>Related Projects</h4>
+            <p id="research-popup-applications-text">
+              <!-- 응용 분야가 동적으로 로드됩니다 -->
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- 멤버 소개 섹션 -->
-  <section id="members" class="animate-section">
-    
-    <!-- Faculty -->
-    <div id="faculty" class="animate-section">
-        <h3 class="subchapter-title">Supervisor</h3>
-        <div class="professor">
-            <img src="HLee.jpg" alt="Faculty">
-            <h3>Dr. Hoonyong Lee</h3>
-            <p>Career & Awards</p>
-        </div>
-    </div>
-    
-    <!-- Students -->
-    <div id="students" class="animate-section">
-        <h3 class="subchapter-title">HDR Students</h3>
-        <div class="students">
-            <div class="member-card">
-                <img src="SKarim.jpg" alt="학생1">
-                <p>Shakir Karim</p>
-                <p>PhD Student</p>
-            </div>
-            <div class="member-card">
-                <img src="JKim.png" alt="학생2">
-                <p>Jinyoung Kim</p>
-                <p>PhD Student</p>
-            </div>
-            <div class="member-card">
-                <img src="CFan.png" alt="학생3">
-                <p>Cherry Fan</p>
-                <p>Undergrad Intern</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Alumni -->
-    <div id="alumni" class="animate-section">
-        <h3 class="subchapter-title">Alumni</h3>
-        <div class="alumni">
-            <div class="member-card">
-                <p>Alumni1</p>
-                <p>Ph.D.</p>
-                <p>Affiliation: USYD</p>
-            </div>
-            <div class="member-card">
-                <p>Alumni2</p>
-                <p>M.Phil.</p>
-                <p>Affiliation: USYD</p>
-            </div>
-        </div>
-    </div>
-  </section>
+    <!-- 멤버 소개 섹션 -->
+    <section id="members" class="animate-section">
+      
+      <!-- Faculty -->
+      <div id="faculty" class="animate-section">
+          <h3 class="subchapter-title">Supervisor</h3>
+          <div class="professor">
+              <img src="HLee.jpg" alt="Faculty">
+              <h3>Dr. Hoonyong Lee</h3>
+              <p>Career & Awards</p>
+          </div>
+      </div>
+      
+      <!-- Students -->
+      <div id="students" class="animate-section">
+          <h3 class="subchapter-title">HDR Students</h3>
+          <div class="students">
+              <div class="member-card">
+                  <img src="SKarim.jpg" alt="학생1">
+                  <p>Shakir Karim</p>
+                  <p>PhD Student</p>
+              </div>
+              <div class="member-card">
+                  <img src="JKim.png" alt="학생2">
+                  <p>Jinyoung Kim</p>
+                  <p>PhD Student</p>
+              </div>
+              <div class="member-card">
+                  <img src="CFan.png" alt="학생3">
+                  <p>Cherry Fan</p>
+                  <p>Undergrad Intern</p>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Alumni -->
+      <div id="alumni" class="animate-section">
+          <h3 class="subchapter-title">Alumni</h3>
+          <div class="alumni">
+              <div class="member-card">
+                  <p>Alumni1</p>
+                  <p>Ph.D.</p>
+                  <p>Affiliation: USYD</p>
+              </div>
+              <div class="member-card">
+                  <p>Alumni2</p>
+                  <p>M.Phil.</p>
+                  <p>Affiliation: USYD</p>
+              </div>
+          </div>
+      </div>
+    </section>
   
   <!-- 발행 논문 테이블 (CSV 파일 참조 버전) -->
   <section id="publications" class="animate-section">
@@ -947,7 +961,7 @@
     }
     
     tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(0, 122, 255, 0.05);
     }
     
     tr:hover {
@@ -964,14 +978,14 @@
     }
     
     .pub-category-btn {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(0, 122, 255, 0.1);
       color: var(--theme-text);
       border: none;
       padding: 12px 20px;
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: bold;
       transition: all 0.3s ease;
     }
     
@@ -994,7 +1008,7 @@
     }
     
     .year-tab {
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(0, 122, 255, 0.05);
       color: var(--theme-text);
       border: none;
       padding: 8px 16px;
@@ -1022,7 +1036,7 @@
     }
     
     .page-btn {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(0, 122, 255, 0.1);
       color: var(--theme-text);
       border: none;
       width: 36px;
@@ -1190,7 +1204,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color:  rgba(248, 248, 248, 0.95);
       z-index: 1000;
       display: flex;
       flex-direction: column;
@@ -1211,14 +1225,14 @@
     }
 
     .popup-content {
-      background-color: rgba(30, 30, 30, 0.95);
+      background-color: rgba(248, 248, 248, 0.98);
       max-width: 900px;
       width: 95%;
       max-height: calc(95vh - 40px); /* 95vh로 여유 공간 확보 */
       min-height: 300px;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       position: relative;
       margin: auto; /* 상하 중앙 정렬 */
       border-top: 3px solid var(--theme-primary);
@@ -1266,7 +1280,7 @@
     .popup-gallery {
       width: auto;
       position: relative;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color:  rgba(248, 248, 248, 0.9);
       flex: 0 0 auto;
       max-height: 50%;
       overflow: hidden;
@@ -1294,8 +1308,8 @@
 
     .gallery-item {
       flex: 0 0 100%; /* 명시적으로 100% 설정 */
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
       scroll-snap-align: center;
       padding: 30px;
       box-sizing: border-box;
@@ -1304,24 +1318,7 @@
       justify-content: center;
       overflow: hidden; /* 넘치는 부분 숨김 */
     }
-
-    .gallery-item img {
-      /* ❌ 이걸 없애세요
-      width: auto !important;
-      height: 85% !important;
-      */
-
-      /* ✅ 이미지 박스(요소) 자체를 .gallery-item 크기에 100% 채우고 */
-      width : 100%;
-      height: 100%;
-
-      /*    그 안에서 잘리지 않게 비율대로 축소합니다. */
-      object-fit    : contain;
-      object-position: center;
-
-      display: block;
-      margin: 0;
-    }
+    
     .gallery-nav {
       position: absolute;
       top: 50%;
@@ -1354,7 +1351,7 @@
       display: flex;
       justify-content: center;
       padding: 15px 0; /* 패딩 추가로 공간 확보 */
-      background-color: rgba(0, 0, 0, 0.7); /* 배경색으로 구분 */
+      background-color:  rgba(248, 248, 248, 0.9); /* 배경색으로 구분 */
       flex-shrink: 0; /* 크기 고정 */
       position: relative;
       z-index: 10;
@@ -1394,18 +1391,18 @@
       font-size: 1.8rem;
       font-weight: bold;
       margin-bottom: 15px;
-      color: #fff;
+      color: var(--theme-text); 
     }
 
     .popup-date {
       font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--theme-text); 
       margin-bottom: 20px;
     }
 
     .popup-text {
       line-height: 1.6;
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--theme-text); 
       margin-bottom: 20px;
     }
 
@@ -1451,6 +1448,7 @@
     }
 
     /* 반응형 디자인 */
+
     @media (max-width: 768px) {
       .latest-news {
         flex-direction: column;
@@ -1565,7 +1563,7 @@
       }
 
       .popup-gallery {
-        max-height: 45%; /* 넓은 화면에서 이미지 비율 더 줄임 */
+        max-height: 60vh; /* 넓은 화면에서 이미지 비율 더 줄임 */
       }
     }
 
@@ -1588,11 +1586,11 @@
     }
 
     section:nth-of-type(odd) {
-      background-color: rgba(0, 0, 0, 0.7) !important;
+      background-color: rgba(255, 255, 255, 0.95) !important;
     }
 
     section:nth-of-type(even) {
-      background-color: rgba(50, 50, 50, 0.7) !important;
+      background-color: rgba(248, 248, 248, 0.95) !important;
     }
 
     /* 기존 CSS 스타일 뒤에 추가할 코드 */
@@ -1638,7 +1636,221 @@
       transform: translateY(-5px);
       box-shadow: 0 15px 40px rgba(255, 20, 147, 0.25);
     }
-    
+    /* ---------- Research Topic : Apple‑like Card Layout ---------- */
+    .topics-scroll{
+      display: flex;
+      gap: clamp(20px, 4vw, 40px);
+      padding: 0 clamp(20px, 5vw, 60px);
+      padding-top: 20px;
+      margin-top: -20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      justify-content: center;
+      margin: clamp(5px, 6vw, 10px) 0;
+    }
+    .topic-card{
+      flex: 0 0 clamp(250px, 25vw, 320px);
+      background: white;
+      border-radius: clamp(15px, 2.5vw, 20px);
+      padding: clamp(2px, 0.1vw, 5px) clamp(2.5px, 0.3vw, 5px);
+      padding-top: clamp(2px, 0.1vw, 5px);     /* 상단만 극도로 줄임 */
+      padding-bottom: clamp(2px, 0.1vw, 5px); /* 하단은 유지 */
+      padding-left: clamp(2px, 0.1vw, 5px);  /* 좌우는 유지 */
+      padding-right: clamp(12px, 0.1vw, 5px);
+      box-shadow: 0 clamp(5px, 1.5vw, 15px) clamp(15px, 4vw, 35px) rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+      scroll-snap-align: center;
+      margin-bottom: clamp(20px, 4vw, 40px);
+    }
+    .topic-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 20px 50px rgba(0,122,255,.15);
+      border-color: var(--theme-primary);
+      z-index: 10;
+    }
+    .topic-card figure{
+      margin: 0 0 clamp(2px, 2.5vw, 5px) 0;
+      margin-top: 0; 
+      position: relative;
+      height: clamp(150px, 20vw, 220px);
+      border-radius: clamp(10px, 2vw, 15px)
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .topic-card img{
+      width: 80%;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(1.1) contrast(1.1);
+    }
+    .topic-card h3{
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      margin: 0 0 clamp(4px, 1vw, 10px) 0; 
+      color: var(--theme-text);
+      line-height: 1.2;
+      text-align: center;
+    }
+    .topic-card .tagline{
+      font-size: clamp(0.8rem, 1.8vw, 1rem);
+      color: var(--theme-text-light);
+      margin: 0 0 clamp(12px, 2.5vw, 25px) 0; 
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* 카테고리 배지 */
+    .topic-badge {
+      display: block;        /* inline-block → block으로 변경 */
+      background: var(--theme-primary);
+      color: white;
+      padding: clamp(3px, 0.8vw, 5px) clamp(5px, 1.5vw, 9px);  /* 적응형 패딩 */
+      border-radius: clamp(10px, 2vw, 18px);  /* 적응형 모서리 */
+      font-size: clamp(8px, 1.5vw, 12px);  /* 적응형 폰트 크기 */
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: clamp(2px, 0.5vw, 4px) auto clamp(6px, 1.5vw, 10px) auto;  
+      text-align: center;
+      width: fit-content;
+    }
+
+    /* Key Capabilities 섹션 */
+    .key-capabilities {
+      margin-top: clamp(12px, 2.5vw, 25px); 
+    }
+
+    .key-capabilities h4 {
+      font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+      color: var(--theme-primary);
+      margin: 0 0 clamp(4px, 0.8vw, 6px) 0;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      text-align: center;
+    }
+
+    .capabilities-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .capabilities-list li {
+      display: flex;
+      align-items: center;
+      padding: clamp(1px, 0.3vw, 2px) 0;  /* 적응형 패딩 */
+      font-size: clamp(0.7rem, 1.2vw, 0.8rem);  /* 적응형 폰트 크기 */
+      color: var(--theme-text-light);
+      line-height: 1.4;
+    }
+
+    .capabilities-list li:before {
+      content: '✓';
+      color: var(--theme-primary);
+      font-weight: bold;
+      margin-right: 6px;
+      font-size: 0.9rem;
+    }
+
+    /* 호버 효과 */
+    .topic-card:hover .topic-badge {
+      background: var(--theme-primary-dark);
+      transform: scale(1.05);
+    }
+
+    .topic-card:hover h3 {
+      color: var(--theme-primary);
+    }
+
+    /* 데스크톱 ≥1024px : 스크롤 막고 가로 나열 */
+    @media (min-width:650px){
+      .topics-scroll{
+        overflow-x:visible;
+        justify-content:center;     /* 가운데 정렬 */
+      }
+      .topic-card{
+        flex:0 0 280px;             /* 동일 너비 카드 */
+      }
+    }
+    @media (min-width: 512px){
+      .popup-gallery .gallery-item img{
+          width     : auto;   /* 가로 길이 강제 X */
+          height    : 100%;   /* 세로를 갤러리 높이에 맞추기 */
+          max-width : 100%;   /* 혹시 세로가 너무 작을 때 가로 100% 넘어가지 않도록 */
+          object-fit: contain;
+      }
+    }
+    .gallery-item img{
+      max-width : 100%;
+      max-height: 100%;
+      width     : auto;
+      height    : auto;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .gallery-item img.landscape{      /* 가로가 긴 사진 */
+      width : 100%;
+      height: auto;
+    }
+    .gallery-item img.portrait{       /* 세로가 긴 사진 */
+      width : auto;
+      height: 100%;
+    }
+
+    /* ── Research Topics  투명 글라스 스크롤바 ───────────────────────────── */
+    .topics-scroll{
+      /* Firefox용: thumb 색만 주고 트랙은 투명 */
+      scrollbar-width : thin;
+      scrollbar-color : rgba(255,255,255,.25) transparent;
+
+      /* Edge/Chrome/Safari용 기본 설정 */
+      -webkit-overflow-scrolling: touch;          /* 부드러운 스와이프 */
+      padding-bottom: 14px;                       /* thumb가 카드 위에 겹치지 않게 살짝 띄움 */
+      position: relative;
+    }
+
+    /* WebKit 전용 커스텀 */
+    .topics-scroll::-webkit-scrollbar{
+      height: 8px;                                /* 얇은 바 */
+      background: transparent;                    /* 트랙 완전 투명 */
+    }
+    .topics-scroll::-webkit-scrollbar-thumb{
+      background      : rgba(255,255,255,.25);    /* 흐린 유리‑막대 느낌 */
+      border-radius   : 4px;
+      backdrop-filter : blur(4px);                /* 글라스 효과 */
+      transition      : background .3s;
+    }
+    /* 호버·드래그 시만 또렷하게 */
+    .topics-scroll:hover::-webkit-scrollbar-thumb,
+    .topics-scroll::-webkit-scrollbar-thumb:active{
+      background: var(--theme-primary-transparent);   /* 딥핑크 계열(테마) */
+    }
+
+    @media (max-width:600px) {
+      .topics-scroll{ scrollbar-width:none; }               /* Firefox */
+      .topics-scroll::-webkit-scrollbar{ display:none; }    /* WebKit */
+    }
+
+    .topic-card{
+      flex: 0 0 35%;    /* 모바일: 65 % 폭  → 이전 80 % */
+      max-width: 260px; /* 모바일 최대 폭   → 이전 320 px */
+      padding: 60px 48px; /* 안쪽 여백도 살짝 줄임 */
+    }
+
+    @media (min-width:1024px){
+      .topic-card{
+        flex: 0 0 220px;  /* 데스크톱 카드 폭 → 이전 280 px */
+      }
+    }
 	</style>
   
   <!-- 자바스크립트 코드 -->
@@ -1833,7 +2045,9 @@
           openResearchPopup(researchType);
         });
       });
-
+      document.querySelectorAll('.topic-card').forEach(card=>{
+        card.addEventListener('click', ()=>openResearchPopup(card.dataset.research));
+    });
       // -------------------- Publications CSV 로드 관련 코드 --------------------
       
       // CSV 파일 로드 및 파싱
@@ -2365,6 +2579,17 @@
               galleryItem.innerHTML = `<img src="${imagePath}" alt="${newsItem.title} - Image ${index + 1}">`;
               galleryContainer.appendChild(galleryItem);
               
+              // ② 이미지 방향(가로/세로) 판별해서 클래스 부여
+              const img = galleryItem.querySelector('img');
+              img.addEventListener('load', () => {
+                img.classList.remove('landscape','portrait');   // 팝업 재사용 대비
+                if (img.naturalWidth >= img.naturalHeight){
+                  img.classList.add('landscape');   // 가로 사진
+                } else {
+                  img.classList.add('portrait');    // 세로 사진
+                }
+              });
+
               // 갤러리 인디케이터 점 생성
               const dot = document.createElement('div');
               dot.className = `gallery-dot ${index === 0 ? 'active' : ''}`;
@@ -2469,6 +2694,7 @@
       // 뉴스 데이터 로드 시작
       loadNewsData();
     });
+    
   </script>
 </body>
 </html>
