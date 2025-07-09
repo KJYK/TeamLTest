@@ -65,7 +65,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.15);
       z-index: 0;
     }
     
@@ -1744,7 +1744,7 @@
         flex:0 0 280px;             /* 동일 너비 카드 */
       }
       .topics-scroll{
-        overflow: visible;  /* 가로·세로 모두 노출 */
+        overflow-x:auto;;  /* 가로·세로 모두 노출 */
       }
     }
     @media (min-width: 512px){
@@ -1792,7 +1792,10 @@
     }
 
     @media (max-width:600px) {
-      .topics-scroll{ scrollbar-width:none; overflow: visible;}               /* Firefox */
+      .topics-scroll{ scrollbar-width:none;
+                      overflow-x:auto;
+                      overflow-y:visible;
+                      -webkit-overflow-scrolling:touch;}               /* Firefox */
       .topics-scroll::-webkit-scrollbar{ display:none; }    /* WebKit */
     }
 
