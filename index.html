@@ -100,8 +100,8 @@
       overflow-y:visible;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
-
-      width:max-content;          /* 카드 총폭만큼만 컨테이너 폭 */
+      padding-top:12px;
+      width:100%;          /* 카드 총폭만큼만 컨테이너 폭 */
       justify-content:flex-start; /* 기본 = 왼쪽 */
       margin:0 auto;              /* 부모보다 좁아지면 자동 중앙 */
       scroll-padding-left:clamp(20px,5vw,60px); /* 스냅 시 첫 카드 패딩 */
@@ -524,7 +524,7 @@
       transition:transform .3s,box-shadow .3s;
     }
     .topic-card:hover{
-      transform:translateY(-6px);
+      transform:translateY(-8px);
       box-shadow:0 18px 45px rgba(0,0,0,.25);
     }
 
@@ -1642,7 +1642,7 @@
     }
     /* ---------- Research Topic : Apple‑like Card Layout ---------- */
     .topic-card:hover{
-      transform:translateY(-8px);
+      transform:translateY(-2px);
       box-shadow:0 20px 50px rgba(0,122,255,.15);
       border-color: var(--theme-primary);
       z-index: 10;
@@ -1744,7 +1744,9 @@
         flex:0 0 280px;             /* 동일 너비 카드 */
       }
       .topics-scroll{
-        overflow-x:auto;;  /* 가로·세로 모두 노출 */
+        overflow-x:auto;  /* 가로·세로 모두 노출 */
+        overflow-y:visible;
+        padding-top:12px;
       }
     }
     @media (min-width: 512px){
