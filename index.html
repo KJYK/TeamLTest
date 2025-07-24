@@ -102,9 +102,11 @@
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       padding-top:12px;
-      width:100%;          /* 카드 총폭만큼만 컨테이너 폭 */
+      width:fit-content;          /* 카드 총폭만큼만 컨테이너 폭 */
       justify-content:flex-start; /* 기본 = 왼쪽 */
       margin:0 auto;              /* 부모보다 좁아지면 자동 중앙 */
+      margin-left:auto;
+      margin-right:auto;      /* 남는 공간을 좌우에 동일하게 */
       scroll-padding-left:clamp(20px,5vw,60px); /* 스냅 시 첫 카드 패딩 */
     }
     .research-topic-item {
