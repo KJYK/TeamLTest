@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
+  <!-- 투명 배경 위에 지름 46px 원 -->
+  <circle cx="23" cy="23" r="23" fill="#e64628"></circle>
+  <!-- 가운데 정렬된 흰색 플러스 기호 (두 직사각형을 교차 배치) -->
+  <rect x="21" y="13" width="4" height="20" fill="#fff"></rect>
+  <rect x="13" y="21" width="20" height="4" fill="#fff"></rect>
+</svg>
