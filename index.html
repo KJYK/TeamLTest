@@ -14,7 +14,7 @@
       --theme-primary-very-transparent: rgba(230, 70, 40, 0.3);
       --theme-bg-dark: rgba(0, 0, 0, 0.7);
       --theme-bg-darker: rgba(20, 20, 20, 0.7);
-      --theme-text: #rgba(40, 40, 40, 1);
+      --theme-text: rgba(40, 40, 40, 1);
       --theme-text-light: rgba(40, 40, 40, 0.8);
       --side-spacing: clamp(20px, 5vw, 60px);
       --hero-card-ratio: 0.75;
@@ -102,11 +102,9 @@
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       padding-top:12px;
-      width:fit-content;          /* 카드 총폭만큼만 컨테이너 폭 */
+      width:100%;          /* 카드 총폭만큼만 컨테이너 폭 */
       justify-content:flex-start; /* 기본 = 왼쪽 */
       margin:0 auto;              /* 부모보다 좁아지면 자동 중앙 */
-      margin-left:auto;
-      margin-right:auto;      /* 남는 공간을 좌우에 동일하게 */
       scroll-padding-left:clamp(20px,5vw,60px); /* 스냅 시 첫 카드 패딩 */
     }
     .research-topic-item {
@@ -328,11 +326,12 @@
     }
 
     .research-popup-header {
-      background: linear-gradient(135deg, var(--theme-primary), var(--theme-primary-dark));
-      padding: 30px;
-      text-align: center;
-      position: relative;
-      flex-shrink: 0;
+      background:#fff; /* 흰 바탕 */
+      padding:40px 40px 25px; /* 좌우 여유 */
+      text-align:left; /* 왼쪽 정렬 */
+      display:flex;flex-direction:column-reverse;
+      align-items:flex-start; /* 큰 제목을 밑으로 */
+      border-bottom:1px solid #fff;
     }
 
     .research-popup-close {
@@ -376,18 +375,19 @@
     }
 
     .research-popup-title {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 1000;
       margin: 0;
-      color: #fff;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      color:#1d1d1f;
+      text-shadow:none
     }
 
     .research-popup-subtitle {
-      font-size: 1.1rem;
       margin: 10px 0 0 0;
-      opacity: 0.9;
-      color: #fff;
+      color:#1d1d1f;
+      opacity:1;
+      font-size:0.75rem;
+      font-weight:600;
     }
 
     .research-popup-body {
@@ -396,6 +396,7 @@
       flex: 1;
       scrollbar-width: thin;
       scrollbar-color: var(--theme-primary) rgba(255, 255, 255, 0.1);
+      background:#fff;
     }
 
     .research-popup-body::-webkit-scrollbar {
@@ -548,7 +549,7 @@
 
       /* 여기만 원하는 방식으로 교체 */
       /* 1) 아이콘 색을 그대로 쓸 때 */
-      background: var(--theme-primary) url('icons/PlusIcon.svg') center/60% no-repeat; */
+      background: var(--theme-primary) url('icons/PlusIcon.svg') center/60% no-repeat;
 
       /* 2) 아이콘 색을 theme‑primary 로 바꾸고 싶을 때 (mask 방법) */
       /*background: var(--theme-primary);
@@ -599,6 +600,42 @@
       .section-title{padding-left:20px;margin-bottom:40px;}
     }
     
+    .research-popup-cards{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:32px;padding:0 0 40px;
+    }
+
+    .popup-card{
+      width:95%; /* 팝업 폭의 95 % */
+      max-width:600px;
+      background:#F5F5F7; /* 연한 회색 */
+      border-radius:24px;
+      display:flex; flex-direction:column;
+      overflow:hidden; transition:.25s;
+    }
+    
+    .popup-card .card-text{
+      padding:24px 20px 18px; text-align:justify;
+    }
+    .popup-card .card-text h3{
+      font-size:1.3rem; font-weight:700; margin:0 0 8px;
+      color:#1d1d1f; line-height:1.25;
+    }
+    .popup-card .card-text p{
+      font-size:.95rem; line-height:1.45; color:#555; margin:0;
+    }
+    .popup-card .card-image{
+      background:#F5F5F7; display:flex;
+      align-items:center; justify-content:center;
+      padding:20px; flex:1 1 auto;
+      width: 100%;
+    }
+    .popup-card .card-image img{
+      max-width:100%; max-height:300px; object-fit:contain;
+    }
+    @media(max-width:600px){ .popup-card{flex:0 0 100%;} }
 	</style>
 </head>
 
@@ -625,7 +662,7 @@
 
   <!-- ─── Research Topics (이미지 카드 버전) ───────────────────────── -->
   <section id="topics" class="research-topics-section animate-section">
-    <h2 class="section-title">Our Research</h2>  <!-- ★ 추가 -->
+    <h2 class="section-title">Research</h2>  <!-- ★ 추가 -->
     <div class="topics-scroll">
       <!-- 카드 1 -->
       <article class="topic-card" data-research="human-sensing">
@@ -653,24 +690,12 @@
         <div class="research-popup-header">
           <div class="research-popup-close" id="research-popup-close"></div>
           <h2 class="research-popup-title" id="research-popup-title">Research Topic</h2>
-          <p class="research-popup-subtitle" id="research-popup-subtitle">Detailed Information</p>
+          <p class="research-popup-subtitle" id="research-popup-subtitle"></p>
         </div>
+
+        <!-- ★ 카드 컨테이너 ONLY ★ -->
         <div class="research-popup-body">
-          <div class="research-popup-description" id="research-popup-description">
-            <!-- 연구 주제 설명이 동적으로 로드됩니다 -->
-          </div>
-          <div class="research-popup-features" id="research-popup-features">
-            <h4>Key Features</h4>
-            <ul id="research-popup-features-list">
-              <!-- 특징 목록이 동적으로 로드됩니다 -->
-            </ul>
-          </div>
-          <div class="research-popup-applications" id="research-popup-applications">
-            <h4>Related Projects</h4>
-            <p id="research-popup-applications-text">
-              <!-- 응용 분야가 동적으로 로드됩니다 -->
-            </p>
-          </div>
+          <div class="research-popup-cards" id="research-popup-cards"></div>
         </div>
       </div>
     </div>
@@ -681,9 +706,8 @@
       <div id="faculty" class="animate-section">
           <h3 class="subchapter-title">Supervisor</h3>
           <div class="professor">
-              <img src="Members/Supervisor/HLee.png" alt="Faculty">
+              <img src="Members/Supervisor/HLee.png" alt="Faculty" data-member="HLee">
               <h3>Dr. Hoonyong Lee</h3>
-              <p>Career & Awards</p>
           </div>
       </div>
       
@@ -692,37 +716,33 @@
           <h3 class="subchapter-title">HDR Students</h3>
           <div class="students">
               <div class="member-card">
-                  <img src="Members/HDR/SKarim.jpg" alt="학생1">
+                  <img src="Members/HDR/SKarim.jpg" alt="학생1" data-member="SKarim">
                   <p>Shakir Karim</p>
-                  <p>PhD Student</p>
               </div>
               <div class="member-card">
-                  <img src="Members/HDR/JKim.png" alt="학생2">
+                  <img src="Members/HDR/JKim.png" alt="학생2" data-member="JKim">
                   <p>Jinyoung Kim</p>
-                  <p>PhD Student</p>
               </div>
           </div>
       </div>
 
       <!-- Students -->
       <div id="students" class="animate-section">
-          <h3 class="subchapter-title">Interns</h3>
+          <h3 class="subchapter-title">Research Students</h3>
           <div class="students">
               <div class="member-card">
                   <img src="Members/Interns/CFan.png" alt="학생3">
                   <p>Cherry Fan</p>
-                  <p>Undergrad Intern</p>
               </div>
               <div class="member-card">
                   <img src="Members/Interns/JGalloway.jpg" alt="학생4">
                   <p>Jolene Galloway</p>
-                  <p>Undergrad Intern</p>
               </div>
           </div>
       </div>
       
       <!-- Alumni -->
-      <div id="alumni" class="animate-section">
+      <!-- <div id="alumni" class="animate-section">
           <h3 class="subchapter-title">Alumni</h3>
           <div class="alumni">
               <div class="member-card">
@@ -736,7 +756,7 @@
                   <p>Affiliation: USYD</p>
               </div>
           </div>
-      </div>
+      </div>-->
     </section>
   
   <!-- 발행 논문 테이블 (CSV 파일 참조 버전) -->
@@ -861,15 +881,40 @@
   </section>
 
   <!-- 연락처 -->
-  <section id="media" class="animate-section">
-    <h2 class="section-title">Essay</h2>  <!-- ★ 추가 -->
+  <!-- <section id="media" class="animate-section">
+    <h2 class="section-title">Essay</h2>  
     <div class="media-container">
       <a href="https://medium.com/@onarcher/" target="_blank" class="media-link">
         <img src="Medium.png" alt="Medium" class="media-icon" title="Visit our Medium blog">
       </a>
     </div>
-  </section>
+  </section> -->
+  <!-- Member Links Popup -->
+  <div class="member-popup" id="member-popup">
+    <div class="member-popup-content">
+      <div class="member-popup-close" id="member-popup-close"></div>
 
+      <div class="member-popup-header">
+        <img id="member-popup-avatar" class="member-popup-avatar" alt="">
+        <div class="member-popup-meta">
+          <h3 id="member-popup-name"></h3>
+          <p id="member-popup-role"></p>
+        </div>
+      </div>
+
+      <div class="member-popup-links">
+        <a id="member-link-cv" class="member-link" href="#" target="_blank" rel="noopener noreferrer" title="CV">
+          <img src="icons/icon_cv.png" alt="CV">
+        </a>
+        <a id="member-link-homepage" class="member-link" href="#" target="_blank" rel="noopener noreferrer" title="Homepage">
+          <img src="icons/icon_homepage.png" alt="Homepage">
+        </a>
+        <a id="member-link-linkedin" class="member-link" href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <img src="icons/icon_linkedin.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+  </div>
   <style>
     /* 추가 스타일들 */
     
@@ -897,12 +942,14 @@
     
     .chapter-title:hover::after {
       width: 100px;
+      margin: 6px auto 0;
     }
     
     .subchapter-title {
       font-size: clamp(22px, 2.4vw, 36px);
-      padding-bottom: 14px;
-      margin-bottom: clamp(40px, 5vw, 56px);
+      padding-top: 36px;
+      padding-bottom: 2px;
+      margin-bottom: clamp(8px, 2vw, 16px);
       text-align: center;
       font-weight: 600;
       color: var(--theme-text-light);
@@ -939,6 +986,7 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       border: 3px solid transparent;
       transition: all 0.3s ease;
+      margin-top: 0;
     }
     
     #members .professor img:hover {
@@ -960,26 +1008,24 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: clamp(15px, 2vw, 30px);
+      gap: clamp(12px, 1.6vw, 22px);
       width: 100%;
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 0;
     }
     
     .member-card {
       min-width: clamp(100px, 15vw, 200px);
       text-align: center;
       font-size: clamp(0.85rem, 1vw, 1rem);
-      padding: 15px;
+      padding: 6px 12px 12px;   /* 특히 top padding을 확 줄임 */
       transition: all 0.3s ease;
       border-radius: 8px;
     }
     
-    .member-card:hover {
-      background: var(--theme-primary-very-transparent);
-      transform: translateY(-5px);
-    }
+
     
     .member-card img {
       width: clamp(80px, 10vw, 120px);
@@ -992,6 +1038,11 @@
       border: 2px solid transparent;
     }
     
+        .member-card img:hover {
+      border-color: var(--theme-primary);
+      transform: scale(1.05);
+    }
+
     .member-card:hover img {
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
@@ -1025,18 +1076,18 @@
     }
     
     th {
-      background-color: var(--theme-primary-very-transparent);
-      color: var(--theme-text);
+      background-color: #EDEFF2;
+      color: rgba(50, 50, 50, 0.3);
       font-weight: bold;
       text-transform: uppercase;
     }
     
     tr:nth-child(even) {
-      background-color: rgba(0, 122, 255, 0.05);
+      background-color: rgba(50, 50, 50, 0.1);
     }
     
     tr:hover {
-      background-color: var(--theme-primary-very-transparent);
+      background-color: #EDEFF2;
       transition: background 0.3s;
     }
     
@@ -1063,12 +1114,12 @@
     }
     
     .year-tab:hover {
-      background-color: var(--theme-primary-very-transparent);
+      background-color: #EDEFF2;
     }
     
     .year-tab.active {
-      background-color: var(--theme-primary);
-      font-weight: 500;
+      background-color: #EDEFF2;
+      font-weight: 700;
     }
     
     .pagination {
@@ -1081,7 +1132,7 @@
     
     .page-btn {
       background-color: rgba(0, 122, 255, 0.1);
-      color: var(--theme-text);
+      color: rgba(50, 50, 50, 0.3);
       border: none;
       width: 36px;
       height: 36px;
@@ -1095,11 +1146,11 @@
     }
     
     .page-btn:hover {
-      background-color: var(--theme-primary-very-transparent);
+      background-color: rgba(50, 50, 50, 0.3);
     }
     
     .page-btn.active {
-      background-color: var(--theme-primary);
+      background-color: rgba(50, 50, 50, 0.7);
       font-weight: bold;
     }
     
@@ -1188,7 +1239,7 @@
     }
 
     .latest-news-title:hover {
-      color: var(--theme-primary-light);
+      color: var(--theme-primary);
       text-decoration: underline;
     }
 
@@ -1208,7 +1259,7 @@
 
     .news-table th {
       padding: 15px;
-      background-color: var(--theme-primary-very-transparent);
+      background-color: rgba(128, 128, 128, 0.15);;
       color: var(--theme-text);
       font-weight: bold;
       text-transform: uppercase;
@@ -1224,7 +1275,7 @@
     }
 
     .news-table tr:hover {
-      background-color: var(--theme-primary-very-transparent);
+      background-color: rgba(128, 128, 128, 0.15);;
     }
 
     .news-title {
@@ -1665,11 +1716,11 @@
       opacity:0; pointer-events:none;   /* 가로 화면에서는 보이지 않음 */
     }
     .hero-overlay-msg h1{
-      font-size:clamp(1.6rem, 6vw, 2.0rem);   /* h1이 확실히 더 큼 */
+      font-size:clamp(1.2rem, 6vw, 1.6rem);   /* h1이 확실히 더 큼 */
       line-height:1.15;
     }
     .hero-overlay-msg h2{
-      font-size:clamp(1.0rem, 4vw, 1.3rem);     /* h2는 상대적으로 작게 */
+      font-size:clamp(0.75rem, 4vw, 1.1rem);     /* h2는 상대적으로 작게 */
       line-height:1.15;
     }
     /* ── 가로(landscape) 화면용 사이드 메시지 ─────── */
@@ -1682,6 +1733,14 @@
     }
     .hero-side-msg h1{font-size:clamp(1.8rem,2.5vw,3.8rem);line-height:1.15;}
     .hero-side-msg h2{font-size:clamp(1.1rem,1.5vw,1.6rem);color:var(--theme-text-light);}
+
+    .hero-overlay-msg h1,
+    .hero-overlay-msg h2,
+    .hero-side-msg   h1,
+    .hero-side-msg   h2{
+      white-space: nowrap;     /* <br> 만 줄바꿈으로 인정 */
+      overflow-wrap: normal;   /* 매우 긴 단어가 임의로 끊기는 것도 방지 */
+    }
 
     @media (orientation:portrait){
       .hero-section{flex-direction:column;
@@ -1932,7 +1991,7 @@
       height:44px;
       padding:4px;
       border-radius:9999px;
-      background:var(--theme-primary-very-transparent);
+      background:rgba(50,50,50,.1);
       overflow:hidden;
     }
     /* 파란 thumb */
@@ -1940,7 +1999,7 @@
       content:'';
       position:absolute; top:4px; left:4px;
       width:calc(50% - 8px); height:36px;
-      background:var(--theme-primary);
+      background:rgba(50,50,50,.5);
       border-radius:32px;
       transition:left .3s ease;
       z-index:0;
@@ -1985,6 +2044,72 @@
       .chapter-title   { margin-bottom: 40px; }   /* 40 → 60px */
       .subchapter-title{ margin-bottom: 30px; }   /* 30 → 48px */
     }
+
+    #hero,
+    .hero-section{
+      background-color: rgba(255,255,255,.95) !important;   /* 흰색 고정 */
+    }
+
+    /* ── Member Popup ───────────────────────── */
+    .member-popup{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.9);
+      z-index: 2500;
+      display:flex; align-items:center; justify-content:center;
+      padding:20px; box-sizing:border-box;
+      opacity:0; visibility:hidden;
+      transition: all .3s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .member-popup.show{ opacity:1; visibility:visible; }
+
+    .member-popup-content{
+      background:#fff;
+      width:min(520px, 90vw);
+      border-radius:16px;
+      position:relative;
+      padding:24px;
+      display:flex; flex-direction:column; align-items:center;
+      box-shadow:0 20px 60px var(--theme-primary-very-transparent);
+    }
+
+    .member-popup-close{
+      position:absolute; top:12px; right:12px;
+      width:32px; height:32px; border-radius:50%;
+      background:rgba(0,0,0,.15);
+      cursor:pointer; transition:transform .2s, background .2s;
+    }
+    .member-popup-close:hover{ background:var(--theme-primary); transform:scale(1.05); }
+    .member-popup-close::before,
+    .member-popup-close::after{
+      content:''; position:absolute; left:50%; top:50%;
+      width:16px; height:2px; border-radius:1px; background:#fff; transform-origin:center;
+    }
+    .member-popup-close::before{ transform:translate(-50%,-50%) rotate(45deg); }
+    .member-popup-close::after { transform:translate(-50%,-50%) rotate(-45deg); }
+
+    .member-popup-header{
+      display:flex; align-items:center; gap:14px; width:100%;
+      margin-bottom:12px;
+    }
+    .member-popup-avatar{
+      width:84px; height:84px; border-radius:50%; object-fit:cover;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+    }
+    .member-popup-meta h3{ margin:0 0 4px; font-size:1.2rem; font-weight:800; }
+    .member-popup-meta p { margin:0; color:var(--theme-text-light); }
+
+    .member-popup-links{
+      display:flex; gap:14px; justify-content:center; padding:14px 0 6px;
+    }
+    .member-link{
+      background:#F5F5F7; border:1px solid rgba(0,0,0,.06);
+      border-radius:12px; padding:10px;
+      transition:transform .15s, box-shadow .15s, opacity .15s;
+    }
+    .member-link:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.12); }
+    .member-link img{ width:44px; height:44px; display:block; }
 	</style>
   
   <!-- 자바스크립트 코드 -->
@@ -1994,39 +2119,66 @@
       const researchData = {
         'human-sensing': {
           title: 'Human Sensing',
-          subtitle: 'From Human to Data', //Data Collecting with Wearable Sensors
-          description: 'We develop multimodal data collection systems to understand complex human behavioral patterns and psychological states. We simultaneously capture high-resolution video and audio data alongside multi-channel biosignals, enabling continuous monitoring in real-life contexts through user-friendly wearable devices. The reliability of our measurements is ensured through survey-based self-report data integration.',
-          features: [
-            'Real-time multimodal data synchronization',
-            "Natural data collection through lightweight sensors that don't interfere with daily life",
-            'Personalized data collection methodologies tailored to individual characteristics and environments',
-            'Data reliability assurance through cross-validation of objective measurements and subjective assessments',
-            'Consistent data collection framework across controlled laboratory and real-life environments'
-          ],
-          applications: 'Team Cohesion, Remote work'
+          subtitle: 'From Human to data',
+          cards: [
+            {
+              headline: 'Go fast. Go far.',
+              body: 'Supercharged by Apple silicon. Integrates CPU, GPU and Neural Engine onto a single chip.',
+              img: 'ResearchTopic/topic1/topic1_1.png'
+            },
+            {
+              headline: 'Stay cool. Work long.',
+              body: 'All‑day battery life lets you create wherever inspiration strikes.',
+              img: 'ResearchTopic/topic1/topic1_2.png'
+            },
+            {
+              headline: 'Stay cool. Work long.',
+              body: 'All‑day battery life lets you create wherever inspiration strikes.',
+              img: 'ResearchTopic/topic1/topic1_3.png'
+            }
+          ]
         },
         'data-analysis': {
-          title: 'Pattern Discovery & Intervention Design',
-          subtitle: 'From Data to Insight', //AI Based Data Analysis
-          description: 'We apply AI-based analysis to collected behavioral data to detect complex patterns and anomalies. We objectively measure and quantify abstract concepts such as team cohesion and social bonds through biosignals and behavioral indicators. Through cross-analysis with self-assessment survey results, we identify individuals or groups experiencing potential issues at an early stage and accurately determine situations requiring intervention. This comprehensive analytical framework establishes a foundation for scientifically understanding and predicting complex human psychological and social states.',
-          features: [
-            'AI-powered pattern recognition algorithms for complex behavioral data analysis',
-            'Objective quantification of abstract social concepts through biosignal integration',
-            'Cross-validation framework combining objective measurements with subjective assessments',
-          ],
-          applications: 'Team Cohesion, Social Bonds in Remote Work'
+          title: 'Human Sensing',
+          subtitle: 'From Data to Insight',
+          cards: [
+            {
+              headline: 'Go fast. Go far.',
+              body: 'Supercharged by Apple silicon. Integrates CPU, GPU and Neural Engine onto a single chip.',
+              img: 'ResearchTopic/topic2/topic2_1.png'
+            },
+            {
+              headline: 'Stay cool. Work long.',
+              body: 'All‑day battery life lets you create wherever inspiration strikes.',
+              img: 'ResearchTopic/topic2/topic2_2.png'
+            },
+            {
+              headline: 'Stay cool. Work long.',
+              body: 'All‑day battery life lets you create wherever inspiration strikes.',
+              img: 'ResearchTopic/topic2/topic2_3.png'
+            }
+          ]
         },
         'intervention': {
-          title: 'Intervention Design',
+          title: 'Human Sensing',
           subtitle: 'From Insight to Action',
-          description: 'We design personalized intervention strategies based on data analysis results. We develop intervention messages that integrate psychological principles such as social norms to simultaneously stimulate internal motivation for self-reflection and external behavioral changes such as helping behaviors. All developed intervention methods are rigorously validated for their applicability and effectiveness not only in laboratory environments but also in real-world settings, with the goal of providing practical and sustainable solutions.',
-          features: [
-            'Personalized intervention design based on individual data patterns',
-            'Psychology-driven messaging using social norms and behavioral principles',
-            'Dual-target approach for internal motivation and external behavior change',
-            'Real-world validation testing for practical effectiveness'
-          ],
-          applications: 'Clinical diagnostics, medical research platforms, healthcare decision support, patient monitoring systems, and biomedical data analytics.'
+          cards: [
+            {
+              headline: 'Go fast. Go far.',
+              body: 'Supercharged by Apple silicon. Integrates CPU, GPU and Neural Engine onto a single chip.',
+              img: 'ResearchTopic/topic3/topic3_1.png'
+            },
+            {
+              headline: 'Stay cool. Work long.',
+              body: 'All‑day battery life lets you create wherever inspiration strikes.',
+              img: 'ResearchTopic/topic3/topic3_2.png'
+            },
+            {
+              headline: 'Stay cool. Work long.',
+              body: 'All‑day battery life lets you create wherever inspiration strikes.',
+              img: 'ResearchTopic/topic3/topic3_3.png'
+            }
+          ]
         }
       };
 
@@ -2109,32 +2261,33 @@
       
       // 연구 주제 팝업 함수
       function openResearchPopup(researchType) {
-        const popup = document.getElementById('research-popup');
         const data = researchData[researchType];
-        
-        if (!data) return;
-        
-        // 팝업 내용 업데이트
+        if(!data) return;
+
+        // 헤더 텍스트
         document.getElementById('research-popup-title').textContent = data.title;
-        document.getElementById('research-popup-subtitle').textContent = data.subtitle;
-        document.getElementById('research-popup-description').textContent = data.description;
-        
-        // 특징 목록 업데이트
-        const featuresList = document.getElementById('research-popup-features-list');
-        featuresList.innerHTML = '';
-        data.features.forEach(feature => {
-          const li = document.createElement('li');
-          li.textContent = feature;
-          featuresList.appendChild(li);
+        document.getElementById('research-popup-subtitle').textContent = data.subtitle || '';
+
+        // 카드 컨테이너 비우고 다시 채우기
+        const box = document.getElementById('research-popup-cards');
+        box.innerHTML = '';
+
+        (data.cards || []).forEach(c=>{
+          const card = document.createElement('div');
+          card.className = 'popup-card';
+          card.innerHTML = `
+            <div class="card-text">
+              <h3>${c.headline}</h3>
+              <p>${c.body}</p>
+            </div>
+            <div class="card-image">
+              <img src="${c.img}" alt="${c.headline}">
+            </div>`;
+          box.appendChild(card);
         });
-        
-        // 응용 분야 업데이트
-        document.getElementById('research-popup-applications-text').textContent = data.applications;
-        
-        // 팝업 표시
-        popup.classList.add('show');
-        
-        // 스크롤 방지
+
+        // 팝업 열기
+        document.getElementById('research-popup').classList.add('show');
         document.body.style.overflow = 'hidden';
       }
       
@@ -2831,7 +2984,103 @@
       // 뉴스 데이터 로드 시작
       loadNewsData();
     });
-    
+    /* ── Member: 링크 데이터(여기서만 관리하면 됨) ─────────────────── */
+    const memberDirectory = {
+      HLee: {
+        name: "Dr. Hoonyong Lee",
+        role: "hoonyong.lee@sydney.edu.au",
+        avatar: "Members/Supervisor/HLee.png",
+        links: {
+          cv: "",                             // 예: "Members/Supervisor/HLee_CV.pdf"
+          homepage: "",                       // 예: "https://researchers.sydney.edu.au/..."
+          linkedin: ""                        // 예: "https://www.linkedin.com/in/..."
+        }
+      },
+      SKarim: {
+        name: "Shakir Karim",
+        role: "shakir.karim@sydney.edu.au",
+        avatar: "Members/HDR/SKarim.jpg",
+        links: {
+          cv: "",
+          homepage: "",
+          linkedin: ""
+        }
+      },
+      JKim: {
+        name: "Jinyoung Kim",
+        role: "jinyoung.kim@sydney.edu.au",
+        avatar: "Members/HDR/JKim.png",
+        links: {
+          cv: "",
+          homepage: "",
+          linkedin: ""
+        }
+      }
+    };
+
+    /* ── Member: 팝업 열기/닫기 ─────────────────────────────────────── */
+    function setMemberLink(id, url){
+      const a = document.getElementById(id);
+      if (!a) return;
+      if (url) {
+        a.href = url;
+        a.style.pointerEvents = "auto";
+        a.style.opacity = "1";
+        a.setAttribute("aria-disabled", "false");
+      } else {
+        a.removeAttribute("href");
+        a.style.pointerEvents = "none";
+        a.style.opacity = ".35";               // 비활성처럼 보이게
+        a.setAttribute("aria-disabled", "true");
+      }
+    }
+
+    function openMemberPopup(memberId){
+      const info = memberDirectory[memberId];
+      if (!info) return;
+
+      const avatar = document.getElementById("member-popup-avatar");
+      const nameEl = document.getElementById("member-popup-name");
+      const roleEl = document.getElementById("member-popup-role");
+
+      avatar.src = info.avatar;
+      avatar.alt = info.name;
+      nameEl.textContent = info.name;
+      roleEl.textContent = info.role || "";
+
+      setMemberLink("member-link-cv",       info.links.cv);
+      setMemberLink("member-link-homepage", info.links.homepage);
+      setMemberLink("member-link-linkedin", info.links.linkedin);
+
+      document.getElementById("member-popup").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMemberPopup(){
+      document.getElementById("member-popup").classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    /* 닫기 버튼 / 바깥 클릭 */
+    document.getElementById("member-popup-close").addEventListener("click", closeMemberPopup);
+    document.getElementById("member-popup").addEventListener("click", (e)=>{
+      if (e.target.id === "member-popup") closeMemberPopup();
+    });
+
+    /* ESC로 닫기: 기존 ESC 핸들러에 이 두 줄만 추가했으면 OK */
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape") {
+        const mp = document.getElementById("member-popup");
+        if (mp.classList.contains("show")) closeMemberPopup();
+      }
+    });
+
+    /* ── Member: 이미지 클릭 → 팝업 열기 ───────────────────────────── */
+    document.querySelectorAll('img[data-member]')
+      .forEach(img=>{
+        img.style.cursor = "pointer";
+        img.addEventListener('click', ()=> openMemberPopup(img.dataset.member));
+      });
   </script>
 </body>
 </html>
