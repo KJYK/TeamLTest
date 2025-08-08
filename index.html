@@ -664,6 +664,12 @@
   <section id="topics" class="research-topics-section animate-section">
     <h2 class="section-title">Research</h2>  <!-- ★ 추가 -->
     <div class="topics-scroll">
+      <!-- 카드 0 -->
+      <article class="topic-card" data-research="ongoing-research">
+        <img src="ResearchTopic/ResearchTopicCard0.PNG" alt="Ongoing Research">
+        <div class="card-plus"></div>
+      </article>
+      
       <!-- 카드 1 -->
       <article class="topic-card" data-research="human-sensing">
         <img src="ResearchTopic/ResearchTopicCard1.PNG" alt="Human Sensing">
@@ -2118,6 +2124,17 @@
     document.addEventListener("DOMContentLoaded", () => {
       // -------------------- 연구 주제 데이터 정의 (업데이트된 버전) --------------------
       const researchData = {
+        'ongoing-research': {
+          title: 'Ongoing Research',
+          subtitle: 'Application in Project Management',
+          cards: [
+            {
+              headline: 'Go fast. Go far.',
+              body: 'Supercharged by Apple silicon. Integrates CPU, GPU and Neural Engine onto a single chip.',
+              img: 'ResearchTopic/topic0/topic0_1.png'
+            }
+          ]
+        },
         'human-sensing': {
           title: 'Human Sensing',
           subtitle: 'From Human to data',
