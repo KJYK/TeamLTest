@@ -1,16 +1,44 @@
 [
   {
-    "index": 2,
+    "index": 6,
     "title": "Korean Military Manpower Administration visited TeamL!",
     "content": "The Military Manpower Administration (MMA) of South Korea visited TeamL, where they attended a lecture by Dr. Lee on his research and the application of artificial intelligence at The Michael Spence Building. In addition, they engaged in in-depth discussions on how AI and TeamL's research could be applied to the operations of the MMA. This visit served as a meaningful opportunity to explore the practical integration of AI technologies and research in the field of public administration. Moving forward, TeamL will continue to collaborate with the MMA and other institutions to develop AI-driven innovative solutions and contribute to the creation of social value.",
     "date": "20250423",
     "images": ["News/New7/KoreanMMA.jpg", "News/New7/USYD.jpg"]
   },
   {
-    "index": 1,
+    "index": 5,
+    "title": "Jolene has joined TeamL!",
+    "content": "Jolene has joined TeamL as a research student.",
+    "date": "20250601",
+    "images": []
+  },
+  {
+    "index": 4,
+    "title": "Cherry has joined TeamL!",
+    "content": "Cherry has joined TeamL as a research student.",
+    "date": "20250501",
+    "images": []
+  },
+  {
+    "index": 3,
+    "title": "Korean Military Manpower Administration visited TeamL!",
+    "content": "The Military Manpower Administration (MMA) of South Korea visited TeamL, where they attended a lecture by Dr. Lee on his research and the application of artificial intelligence at The Michael Spence Building. In addition, they engaged in in-depth discussions on how AI and TeamL's research could be applied to the operations of the MMA. This visit served as a meaningful opportunity to explore the practical integration of AI technologies and research in the field of public administration. Moving forward, TeamL will continue to collaborate with the MMA and other institutions to develop AI-driven innovative solutions and contribute to the creation of social value.",
+    "date": "20250423",
+    "images": ["News/New7/KoreanMMA.jpg", "News/New7/USYD.jpg"]
+  },
+  {
+    "index": 2,
     "title": "Jinyoung has joined TeamL!",
     "content": "On March 2nd, Jinyoung officially became a member of TeamL as he commenced his PhD at the School of Project Management, University of Sydney!",
     "date": "20250302",
+    "images": []
+  },
+  {
+    "index": 1,
+    "title": "TeamL has been founded.",
+    "content": "TeamL was established following Dr. Lee's appointment to the School of Project Management, Faculty of Engineering, University of Sydney.",
+    "date": "202404901",
     "images": []
   }
 ]
