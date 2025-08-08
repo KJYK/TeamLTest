@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
-  <!-- 투명 배경 위에 지름 46px 원 -->
-  <circle cx="23" cy="23" r="23" fill="#e64628"></circle>
-  <!-- 가운데 정렬된 흰색 플러스 기호 (두 직사각형을 교차 배치) -->
-  <rect x="21" y="13" width="4" height="20" fill="#fff"></rect>
-  <rect x="13" y="21" width="20" height="4" fill="#fff"></rect>
-</svg>
+<svg version="1.1" viewBox="0.0 0.0 283.46456692913387 283.46456692913387" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><clipPath id="p.0"><path d="m0 0l283.46457 0l0 283.46457l-283.46457 0l0 -283.46457z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l283.46457 0l0 283.46457l-283.46457 0z" fill-rule="evenodd"/><path fill="#d9d9d9" d="m0 141.73228l0 0c0 -78.27658 63.455704 -141.73228 141.73228 -141.73228l0 0c37.589737 0 73.63989 14.932466 100.219864 41.512424c26.579956 26.57996 41.51242 62.630123 41.51242 100.219864l0 0c0 78.27658 -63.455704 141.73228 -141.73228 141.73228l0 0c-78.27658 0 -141.73228 -63.455704 -141.73228 -141.73228z" fill-rule="evenodd"/><path fill="#ffffff" d="m60.0 129.63428l69.63428 0l0 -69.63428l24.196014 0l0 69.63428l69.63428 0l0 24.196014l-69.63428 0l0 69.63428l-24.196014 0l0 -69.63428l-69.63428 0z" fill-rule="evenodd"/></g></svg>
