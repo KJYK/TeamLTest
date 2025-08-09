@@ -18,6 +18,7 @@
       --theme-text-light: rgba(40, 40, 40, 0.8);
       --side-spacing: clamp(20px, 5vw, 60px);
       --hero-card-ratio: 0.75;
+       --topic-card-scale: 1.2;
     }
     
     /* 기본 레이아웃 */
@@ -377,7 +378,7 @@
 
     .research-popup-title {
       font-size: 2.5rem;
-      font-weight: 1000;
+      font-weight: 500;
       margin: 0;
       color:#1d1d1f;
       text-shadow:none
@@ -387,8 +388,8 @@
       margin: 10px 0 0 0;
       color:#1d1d1f;
       opacity:1;
-      font-size:0.75rem;
-      font-weight:600;
+      font-size:0.85rem;
+      font-weight:500;
     }
 
     .research-popup-body {
@@ -410,12 +411,12 @@
     }
 
     .research-popup-body::-webkit-scrollbar-thumb {
-      background: var(--theme-primary);
+      background: rgba(50, 50, 50, 0.3);
       border-radius: 4px;
     }
 
     .research-popup-body::-webkit-scrollbar-thumb:hover {
-      background: var(--theme-primary-light);
+      background: rgba(50, 50, 50, 0.1);
     }
 
     .research-popup-description {
@@ -584,6 +585,10 @@
       /* 시각적 강조용 얇은 언더라인 */
       position:relative;
     }
+    #members .section-title{
+      /* 기존 clamp(60px, 6vw, 80px) → 살짝/확실히 줄인 값 */
+      margin-bottom: clamp(24px, 4vw, 40px);
+    }
     .section-title::after{
       content:'';
       position:absolute;
@@ -609,8 +614,8 @@
     }
 
     .popup-card{
-      width:95%; /* 팝업 폭의 95 % */
-      max-width:600px;
+      width:90%; /* 팝업 폭의 95 % */
+      max-width:1500px;
       background:#F5F5F7; /* 연한 회색 */
       border-radius:24px;
       display:flex; flex-direction:column;
@@ -637,13 +642,102 @@
       max-width:100%; max-height:300px; object-fit:contain;
     }
     @media(max-width:600px){ .popup-card{flex:0 0 100%;} }
+
+    
+    /* 타이틀이 자기 줄을 차지하게 하고, 항상 왼쪽 정렬 */
+    .hero-section{ flex-wrap: wrap; }
+    .hero-section .hero-title{
+      order: -1;                 /* 항상 맨 위에 오도록 */
+      width: 100%;               /* 한 줄 전체 차지 */
+      align-self: flex-start;    /* 컨테이너가 가운데 정렬이어도 타이틀은 왼쪽 */
+      margin: 0 0 clamp(20px, 5vw, 28px);
+      text-align: left;
+    }
+
+    /* 가로(landscape)에서만 '가로축 100%' 한 줄 고정 */
+    @media (orientation: landscape){
+      .hero-section .hero-title{ flex: 0 0 100%; }
+    }
+
+    /* 세로(portrait)에선 절대 세로로 늘어나지 않게 리셋 + 카드 가운데 */
+    @media (orientation: portrait){
+      .hero-section{
+        justify-content: flex-start;   /* 화면 위에서부터 쌓기 */
+        text-align: left;
+      }
+      .hero-section .hero-title{ flex: none; }   /* ← 요게 핵심(세로 100% 방지) */
+      .hero-card{
+        margin: 0 auto;                               /* 수평 가운데 */
+        max-width: calc(100% - 2 * var(--side-spacing)); /* 섹션 패딩 고려해 넘치지 않게 */
+      }
+    }
+    /* ── Research Topic 카드 120% 스케일: 폭을 계산식으로 통일 ── */
+    #topics .topic-card{
+      /* 기본(모바일~태블릿) 기준 폭을 변수로 잡고 → 스케일 곱하기 */
+      --card-base: clamp(250px, 25vw, 330px);
+      flex: 0 0 calc(var(--card-base) * var(--topic-card-scale));
+      max-width: calc(var(--card-base) * var(--topic-card-scale)); /* 이전 max-width:320px를 무력화 */
+    }
+
+    /* 650px 이상에서는 원래 280px 기준 → 스케일 곱하기 */
+    @media (min-width:650px){
+      #topics .topic-card{
+        --card-base: 280px;
+      }
+    }
+
+    /* 1024px 이상에서는 원래 330px 기준 → 스케일 곱하기 */
+    @media (min-width:1024px){
+      #topics .topic-card{
+        --card-base: 330px;
+      }
+    }
+
+    /* Research 팝업: 스크롤은 유지하고 스크롤바만 숨기기 */
+    .research-popup-body{
+      /* Firefox & 구형 Edge/IE */
+      scrollbar-width: none;       /* 기존 thin → none */
+      -ms-overflow-style: none;
+    }
+    .research-popup-body::-webkit-scrollbar{
+      /* Chrome, Edge(Chromium), Safari */
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    /* (선택) 팝업 바깥 컨테이너의 스크롤바도 숨기고 싶다면 */
+    .research-popup{
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .research-popup::-webkit-scrollbar{
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    /* Research 토픽 가로 스크롤: 바는 숨기고, 스크롤 기능은 유지 */
+    #topics .topics-scroll{
+      /* Firefox / 구형 Edge */
+      scrollbar-width: none !important;   /* 기존 thin/표시 값을 무력화 */
+      -ms-overflow-style: none !important;
+
+      /* 스크롤은 계속 가능해야 하므로 overflow-x는 그대로 auto 유지 */
+      /* (원래 코드에 overflow-x:auto가 이미 있음) */
+    }
+
+    /* Chrome, Edge(Chromium), Safari */
+    #topics .topics-scroll::-webkit-scrollbar{
+      width: 0 !important;
+      height: 0 !important;
+      display: none !important;           /* 기존 height:8px 규칙을 완전히 덮어씀 */
+    }
 	</style>
 </head>
 
 <body>
   <!-- 히어로 섹션 -->
   <section id="hero" class="hero-section">
-  
+    <h2 class="section-title hero-title">TeamL</h2>
     <!-- 이미지 카드 -->
     <figure class="hero-card">
       <img src="Narrow.png" alt="Human Behaviour & Sensing">
@@ -662,7 +756,7 @@
 </section>
 
   <!-- ─── Research Topics (이미지 카드 버전) ───────────────────────── -->
-  <section id="topics" class="research-topics-section animate-section">
+  <section id="topics" class="research-topics-section">
     <h2 class="section-title">Research</h2>  <!-- ★ 추가 -->
     <div class="topics-scroll">
       <!-- 카드 0 -->
@@ -1648,6 +1742,22 @@
 
     }
 
+    /* ★ Hero(세로/좁은 화면)에서 h1↔h2 간격과 h2 색상만 살짝 손보기 */
+    @media (orientation: portrait){
+      /* 이미지 위 오버레이 텍스트 박스 */
+      .hero-overlay-msg{
+        /* 큰 문장(h1)과 작은 문장(h2) 사이 간격 */
+        gap: clamp(10px, 2.6vw, 18px);
+      }
+      /* 작은 문장(h2) 색상 살짝 부드럽게 → 가독성 향상 */
+      .hero-overlay-msg h2{
+        color: rgba(200, 200, 200, 0.92);
+        /* 선택사항: 이미지가 아주 밝을 때 더 잘 읽히게 하고 싶으면 아래 한 줄 주석 해제 */
+        /* text-shadow: 0 1px 2px rgba(0,0,0,.35); */
+        
+      }
+    }
+
     /* 🔧 추가: 매우 넓은 화면 대응 */
     @media (min-width: 1400px) {
       .popup-content {
@@ -1723,7 +1833,7 @@
       opacity:0; pointer-events:none;   /* 가로 화면에서는 보이지 않음 */
     }
     .hero-overlay-msg h1{
-      font-size:clamp(1.2rem, 6vw, 1.6rem);   /* h1이 확실히 더 큼 */
+      font-size:clamp(1.35rem, 6vw, 1.6rem);   /* h1이 확실히 더 큼 */
       line-height:1.15;
     }
     .hero-overlay-msg h2{
@@ -2138,7 +2248,7 @@
         },
         'human-sensing': {
           title: 'Human Sensing',
-          subtitle: 'From Human to data',
+          subtitle: 'From Human to Data',
           cards: [
             {
               headline: 'Go fast. Go far.',
