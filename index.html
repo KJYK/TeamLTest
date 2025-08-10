@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>TeamL</title>
+  <!-- Favicon (최소 구성) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- (선택) iOS 홈 화면 아이콘 -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-icon180x180.png">
+
+  <!-- (선택) PWA/안드로이드용 매니페스트 -->
+  <link rel="manifest" href="site.webmanifest">
   <style>
     /* 테마 색상 변수 정의 */
     :root {
@@ -730,6 +740,17 @@
       width: 0 !important;
       height: 0 !important;
       display: none !important;           /* 기존 height:8px 규칙을 완전히 덮어씀 */
+    }
+
+    /* Hero의 TeamL 제목 왼쪽에 '텍스트처럼' 붙는 아이콘 */
+    .hero-title::before{
+      content: "";
+      display: inline-block;
+      width: 1em;                 /* 글자 크기와 동일하게 */
+      height: 1em;                /* 글자 크기와 동일하게 */
+      margin-right: 0.35em;       /* 텍스트와 간격 */
+      background: url("assets/Logo_O.svg") center/contain no-repeat;
+      vertical-align: -0.12em;    /* 베이스라인 미세 정렬(폰트에 따라 -0.1~ -0.2em 조절) */
     }
 	</style>
 </head>
