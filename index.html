@@ -352,7 +352,7 @@
       right: 15px;
       width: 35px;
       height: 35px;
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(87, 87, 93, 0.72) !important; /* 어두운 유리 느낌 */
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -364,8 +364,7 @@
     }
 
     .research-popup-close:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-      transform: scale(1.1);
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
     .research-popup-close:before, 
@@ -374,7 +373,7 @@
       position: absolute;
       width: 18px;
       height: 2px;
-      background-color: white;
+      background-color: #fff !important;;
       border-radius: 1px;
     }
 
@@ -717,12 +716,31 @@
     .research-popup{
       scrollbar-width: none;
       -ms-overflow-style: none;
+      /* 화면 크기에 따라 자동으로 줄어드는 여백 변수 */
+      --popup-gutter: clamp(10px, 2vh, 20px);
+      padding: var(--popup-gutter) !important; /* 바깥 여백 통일 */
     }
     .research-popup::-webkit-scrollbar{
       width: 0 !important;
       height: 0 !important;
     }
+    /* 컨텐츠 상자 세로 최대치 = 95% 뷰포트 - 위/아래 여백 */
+    .research-popup-content{
+      max-height: calc(95vh - 2 * var(--popup-gutter)) !important;
+    }
+    /* 모바일 브라우저 주소창 변동에도 안정적인 dvh 지원 시 사용 */
+    @supports (height: 100dvh) {
+      .research-popup-content{
+        max-height: calc(95dvh - 2 * var(--popup-gutter)) !important;
+      }
+    }
 
+    /* 내부 스크롤 영역은 그대로 스크롤 되도록 보장(이미 설정되어 있어도 안전하게 재확인) */
+    .research-popup-body{
+      flex: 1 1 auto !important;
+      overflow-y: auto !important;
+      min-height: 0 !important; /* flex 컨테이너에서 넘침 방지 */
+    }
     /* Research 토픽 가로 스크롤: 바는 숨기고, 스크롤 기능은 유지 */
     #topics .topics-scroll{
       /* Firefox / 구형 Edge */
