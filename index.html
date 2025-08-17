@@ -533,7 +533,6 @@
       border-radius:20px;
       background:#fff;
       padding:0;                         /* 불필요한 안쪽 여백 제거 */
-      box-shadow:0 10px 28px rgba(0,0,0,.12);
       overflow:hidden;
       cursor:pointer;
       scroll-snap-align:start;           /* 스냅 기준을 왼쪽 */
@@ -542,7 +541,6 @@
     }
     .topic-card:hover{
       transform:translateY(-8px);
-      box-shadow:0 18px 45px rgba(0,0,0,.25);
     }
 
     .topic-card img{
@@ -752,6 +750,22 @@
       background: url("assets/Logo_O.svg") center/contain no-repeat;
       vertical-align: -0.12em;    /* 베이스라인 미세 정렬(폰트에 따라 -0.1~ -0.2em 조절) */
     }
+
+    /* [Research 섹션] PC에서 좌우 버튼이 보일 때 하단 여백을 넉넉하게 */
+    #topics.has-nav {
+      /* 기본 80px(섹션 공통 패딩)보다 더 여유 있게 확보 */
+      padding-bottom: clamp(90px, 12vh, 160px);
+    }
+
+    /* 카드 줄과 버튼 사이가 너무 붙어 보이지 않도록 약간의 하단 패딩 */
+    #topics .topics-scroll {
+      padding-bottom: clamp(12px, 2vh, 24px);
+    }
+
+    /* 버튼이 바닥에 딱 붙어 보이지 않도록 조금 위로 올림 */
+    #topics .topics-nav {
+      bottom: clamp(18px, 2.2vw, 32px);
+    }
 	</style>
 </head>
 
@@ -804,6 +818,11 @@
         <div class="card-plus"></div>
       </article>
     </div>
+    <!-- 좌우 이동 버튼 (PC용) -->
+      <div class="topics-nav" id="topics-nav" aria-label="Research cards navigation">
+        <button type="button" class="topics-btn" id="topics-prev" aria-label="왼쪽으로 이동">‹</button>
+        <button type="button" class="topics-btn" id="topics-next" aria-label="오른쪽으로 이동">›</button>
+      </div>
   </section>
 
     <!-- 연구 주제 팝업 -->
@@ -1904,7 +1923,15 @@
         max-width:700px;
       }
       .hero-overlay-msg{opacity:0;}  /* 오버레이 숨김 */
-      .hero-side-msg{display:block;} /* 우측 메시지 노출 */
+      .hero-side-msg{
+        display: flex;              /* 기존 display:block → flex */
+        flex-direction: column;
+        gap: clamp(5px, 2.6vw, 25px);  /* ← 여기 값으로 간격을 키웁니다 */
+      }
+      .hero-side-msg h1,
+      .hero-side-msg h2{
+        margin: 0;                  /* 기본 마진 제거(겹침/중복 방지) */
+      }
     }
 
     /* 기본 카드 스타일 (1번, 3번) */
@@ -1951,7 +1978,6 @@
     /* ---------- Research Topic : Apple‑like Card Layout ---------- */
     .topic-card:hover{
       transform:translateY(-2px);
-      box-shadow:0 20px 50px rgba(0,122,255,.15);
       border-color: var(--theme-primary);
       z-index: 10;
     }
@@ -2249,6 +2275,78 @@
     }
     .member-link:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.12); }
     .member-link img{ width:44px; height:44px; display:block; }
+
+    /* ─────────────────────────────────────────────────────────────
+      [Topics] 4장이 한 화면에 다 보이면 가운데 정렬, 아니면 왼쪽 정렬
+      ───────────────────────────────────────────────────────────── */
+    @media (min-width: 0px) {
+      #topics .topics-scroll { 
+        justify-content: flex-start !important;  /* 기본=왼쪽 정렬 */
+      }
+    }
+    #topics .topics-scroll.is-all-fit {
+      justify-content: center !important;        /* 모두 들어오면 가운데 */
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+      [Topics] 좌/우 이동 버튼(PC용)
+      ───────────────────────────────────────────────────────────── */
+    #topics { position: relative; }  /* 버튼 절대배치 기준 */
+    #topics .topics-nav {
+      position: absolute;
+      right: clamp(20px, 5vw, 60px);
+      bottom: 10px;
+      display: none;                 /* 모바일 기본 숨김 */
+      gap: 10px;
+      z-index: 5;
+    }
+    #topics .topics-nav.hidden { display: none !important; }
+
+    #topics .topics-btn {
+      width: 42px; height: 42px;
+      border: 0; border-radius: 50%;
+      background: rgba(0,0,0,.08);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 20px; line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
+      transition: background .2s, color .2s, transform .2s;
+    }
+    #topics .topics-btn:hover { background: var(--theme-primary); color:#fff; transform: translateY(-1px); }
+    #topics .topics-btn:disabled { opacity: .35; cursor: default; transform: none; }
+
+    /* PC(마우스)에서만 버튼 노출, 모바일/태블릿(터치)에서는 숨김 */
+    @media (hover: hover) and (pointer: fine) {
+      #topics .topics-nav { display: flex; }
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+      [Hero 상단 TeamL] 로고=왼쪽, "TeamL"=오른쪽 & 주황 밑줄 제거
+      ───────────────────────────────────────────────────────────── */
+    .hero-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;  /* 왼쪽(로고) ↔ 오른쪽(TeamL) 양끝 배치 */
+      text-align: right;               /* 텍스트 자체는 오른쪽 정렬 */
+    }
+    /* 주황색 밑줄(섹션 타이틀 공통 효과) 없애기 */
+    .hero-title::after { display: none !important; }
+
+    /* 왼쪽 로고 아이콘 크게 보이게 재정의 (기존 ::before 규칙을 덮어씀) */
+    .hero-title::before{
+      content: "";
+      display: inline-block;
+      width: clamp(28px, 5vw, 48px);
+      height: clamp(28px, 5vw, 48px);
+      margin-right: 0;
+      background: url("assets/Logo_O.svg") center/contain no-repeat;
+      vertical-align: middle;
+    }
+
+    #topics .topics-nav.pin-by-card{
+      top: var(--topics-nav-top);  /* JS에서 계산해 줄 값 */
+      bottom: auto;                /* 기존 bottom 기준은 끔 */
+    }
 	</style>
   
   <!-- 자바스크립트 코드 -->
@@ -2485,6 +2583,78 @@
       document.querySelectorAll('.topic-card').forEach(card=>{
         card.addEventListener('click', ()=>openResearchPopup(card.dataset.research));
     });
+    /* ============================================================
+      [Topics] 가운데/왼쪽 정렬 자동 전환 + 좌/우 이동 버튼 제어
+      ============================================================ */
+    const topicsSection = document.getElementById('topics');
+    const scroller      = topicsSection.querySelector('.topics-scroll');
+    const navWrap       = document.getElementById('topics-nav');
+    const prevBtn       = document.getElementById('topics-prev');
+    const nextBtn       = document.getElementById('topics-next');
+
+    /* 카드 줄 하단에서 30px 떨어진 위치로 버튼을 고정 */
+    function positionTopicsNav() {
+      if (!navWrap || !scroller) return;
+
+      const NAV_GAP = 30;  // ← 여기 숫자만 바꾸면 간격 조절 가능
+      // '카드 줄(bottom)'을 정확히 잡기 위해 scroller의 padding-bottom은 빼줍니다.
+      const paddingBottom = parseFloat(getComputedStyle(scroller).paddingBottom || '0');
+      const top = scroller.offsetTop + scroller.clientHeight - paddingBottom + NAV_GAP;
+
+      navWrap.style.setProperty('--topics-nav-top', `${top}px`);
+    }
+
+    /* 카드 하나 기준으로 '한 칸' 이동량 계산 (카드폭 + gap) */
+    function getStep() {
+      const card = scroller.querySelector('.topic-card');
+      const gap  = parseFloat(getComputedStyle(scroller).gap || '0');
+      return (card ? card.getBoundingClientRect().width : scroller.clientWidth * 0.8) + gap;
+    }
+
+    /* 스크롤 위치에 따라 버튼 활성/비활성 */
+    function updateNavDisabled() {
+      const max = scroller.scrollWidth - scroller.clientWidth - 1;
+      prevBtn && (prevBtn.disabled = scroller.scrollLeft <= 0);
+      nextBtn && (nextBtn.disabled = scroller.scrollLeft >= max);
+    }
+
+    /* 4장이 한 화면에 모두 들어오는지 확인해서 정렬/버튼 상태 갱신 */
+    function updateTopicsLayout() {
+      if (!scroller) return;
+      const fits = scroller.scrollWidth <= scroller.clientWidth + 1;  // +1은 미세 오차 보정
+      scroller.classList.toggle('is-all-fit', fits);
+
+      // PC(마우스)에서만 버튼을 보이되, 모두 들어오면 버튼 숨김
+      const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (navWrap) navWrap.classList.toggle('hidden', !(isDesktopPointer && !fits));
+      
+      /* ★ 추가: 버튼이 실제 보일 때만 섹션에 has-nav 클래스를 붙입니다. */
+      topicsSection.classList.toggle('has-nav', isDesktopPointer && !fits);
+
+      /* ⬇⬇⬇ 추가: 버튼을 '카드 기준'으로 배치하는 클래스 토글 */
+      if (navWrap) navWrap.classList.toggle('pin-by-card', isDesktopPointer && !fits);
+      /* ⬇⬇⬇ 추가: 실제 top 값을 계산해 반영 */
+      positionTopicsNav();
+
+      updateNavDisabled();
+    }
+
+    /* 좌/우 버튼 동작: 부드럽게 한 칸씩 이동 */
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        scroller.scrollBy({ left: -getStep(), behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        scroller.scrollBy({ left:  getStep(), behavior: 'smooth' });
+      });
+    }
+
+    /* 스크롤/리사이즈 시 상태 갱신 */
+    scroller.addEventListener('scroll', updateNavDisabled, { passive: true });
+    window.addEventListener('resize',  updateTopicsLayout, { passive: true });
+
+    /* 최초 1회 상태 설정 */
+    updateTopicsLayout();
       // -------------------- Publications CSV 로드 관련 코드 --------------------
       
       // CSV 파일 로드 및 파싱
