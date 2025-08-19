@@ -784,13 +784,32 @@
     #topics .topics-nav {
       bottom: clamp(18px, 2.2vw, 32px);
     }
+
+    /* 상단 사이트 타이틀 이미지: 한 줄 전체 차지 + 중앙 정렬 */
+    .hero-section .site-title{
+      order: -1;                 /* 카드/텍스트보다 항상 위에 오도록 */
+      width: 100%;
+      display: flex;
+      justify-content: center;   /* 가로 중앙 */
+      align-items: center;       /* 세로 정렬 */
+      margin: 0 0 clamp(20px, 5vw, 28px);
+    }
+
+    /* SVG 크기(높이 기준)만 살짝 제한 – 화면에 맞춰 유연하게 */
+    .hero-section .site-title img{
+      height: clamp(50px, 5vw, 64px);
+      max-width: min(120vw, 720px);
+      object-fit: contain;
+    }
 	</style>
 </head>
 
 <body>
   <!-- 히어로 섹션 -->
   <section id="hero" class="hero-section">
-    <h2 class="section-title hero-title">TeamL</h2>
+    <div class="site-title" aria-label="TeamL">
+      <img src="icons/siteTitle.svg" alt="TeamL">
+    </div>
     <!-- 이미지 카드 -->
     <figure class="hero-card">
       <img src="Narrow.png" alt="Human Behaviour & Sensing">
@@ -1779,7 +1798,7 @@
       }
       
     }
-    @media (orientation: landscape) and (max-height: 600px) {
+    @media (orientation: landscape) {
       .popup-content {
         max-width: calc(100vw - 20px);
         max-height: calc(100vh - 20px);
@@ -1910,9 +1929,7 @@
     .hero-side-msg h2{font-size:clamp(1.1rem,1.5vw,1.6rem);color:var(--theme-text-light);}
 
     .hero-overlay-msg h1,
-    .hero-overlay-msg h2,
-    .hero-side-msg   h1,
-    .hero-side-msg   h2{
+    .hero-overlay-msg h2{
       white-space: nowrap;     /* <br> 만 줄바꿈으로 인정 */
       overflow-wrap: normal;   /* 매우 긴 단어가 임의로 끊기는 것도 방지 */
     }
@@ -1925,8 +1942,7 @@
       .hero-card{min-height:75vh;               /* 세로 하한 */
                   max-height:none;               /* 70 vh 상한 해제 */
                   width:clamp(280px, 90vw, calc(75vh * var(--hero-card-ratio)));
-                  margin:auto;    }                    /* 수평 중앙 */
-      .hero-overlay-msg{opacity:1;}                 /* 카드 중앙 메시지 활성화 */
+                  margin:auto;    }                    /* 수평 중앙 */      /* 카드 중앙 메시지 활성화 */
     }
 
     @media (orientation:landscape){
@@ -1939,10 +1955,8 @@
       .hero-card{
         width:clamp(280px, 55vw, calc(70vh * var(--hero-card-ratio)));                /* 카드 폭을 가로 55 % 정도로 축소 */
         max-width:700px;
-      }
-      .hero-overlay-msg{opacity:0;}  /* 오버레이 숨김 */
-      .hero-side-msg{
-        display: flex;              /* 기존 display:block → flex */
+      } /* 오버레이 숨김 */
+      .hero-side-msg{          /* 기존 display:block → flex */
         flex-direction: column;
         gap: clamp(5px, 2.6vw, 25px);  /* ← 여기 값으로 간격을 키웁니다 */
       }
@@ -2365,6 +2379,70 @@
       top: var(--topics-nav-top);  /* JS에서 계산해 줄 값 */
       bottom: auto;                /* 기존 bottom 기준은 끔 */
     }
+
+    /* === HERO 텍스트: 두 상태만 존재 === */
+    .hero-overlay-msg,
+    .hero-side-msg { display: none; }
+
+    /* 카드 안(overlay)만 보이는 상태 */
+    .hero-section.mode-overlay .hero-overlay-msg {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* 바깥 오른쪽(side)만 보이는 상태 */
+    .hero-section.mode-side .hero-side-msg {
+      display: flex;
+    }
+
+    /* 절대 동시에 보이지 않게 강제 */
+    .hero-section.mode-overlay .hero-side-msg,
+    .hero-section.mode-side   .hero-overlay-msg {
+      display: none !important;
+    }
+
+    /* ── Hero 메시지 간격/색상 일관화 (공통 변수) ───────────────── */
+    .hero-section{
+      /* vmin을 써서 가로/세로 전환 때도 부드럽게 유지 */
+      --hero-copy-gap: clamp(12px, 2.4vmin, 22px);
+      --hero-h2-color: var(--theme-text-light);  /* 기본(사이드 메시지) 색 */
+    }
+
+    /* 두 메시지 컴포넌트에 공통 적용 */
+    .hero-overlay-msg,
+    .hero-side-msg{
+      display:flex;
+      flex-direction:column;
+      gap: var(--hero-copy-gap) !important;
+    }
+
+    .hero-overlay-msg h1,
+    .hero-overlay-msg h2,
+    .hero-side-msg h1,
+    .hero-side-msg h2{
+      margin: 0; /* 브라우저 기본 마진 차이 제거 */
+      line-height: 1.15;
+    }
+
+    /* 공통 색상 적용 */
+    .hero-overlay-msg h2,
+    .hero-side-msg h2{
+      color: var(--hero-h2-color) !important;
+    }
+
+    /* 오버레이(이미지 위)에서만 읽기 좋은 색으로 오버라이드 */
+    .hero-overlay-msg{
+      --hero-h2-color: rgba(230,230,230,.92);     /* 기본 폴백 */
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);     /* 밝은 사진 대비 강화 */
+    }
+
+    /* 지원 브라우저에서 더 자연스럽게 (선택) */
+    @supports (color: color-mix(in srgb, black, white)) {
+      .hero-overlay-msg{
+        --hero-h2-color: color-mix(in srgb, #fff 92%, var(--theme-text) 8%);
+      }
+    }
 	</style>
   
   <!-- 자바스크립트 코드 -->
@@ -2450,7 +2528,7 @@
 
       // -------------------- 스크롤 애니메이션 관련 코드 --------------------
       const sections = document.querySelectorAll('.animate-section');
-      const heroText = document.querySelector('#hero .hero-overlay-msg') 
+      // const heroText = document.querySelector('#hero .hero-overlay-msg') 
       
       // 스크롤 방향 감지를 위한 변수
       let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -2504,14 +2582,37 @@
         });
         
         // 히어로 텍스트 처리
-        if (scrollTop > 100) {
-          heroText.classList.add('hide');
-        } else {
-          heroText.classList.remove('hide');
-        }
+        //if (scrollTop > 100) {
+        //  heroText.classList.add('hide');
+        //} else {
+        //  heroText.classList.remove('hide');
+        //}
         
         // 현재 스크롤 위치 저장
         lastScrollTop = scrollTop;
+
+        // === HERO 모드 스위치(단일 소스) ===
+      const heroEl = document.getElementById('hero');
+      let heroMode = null; // 'overlay' | 'side'
+
+      function pickHeroMode(){
+        const ar = window.innerWidth / window.innerHeight; // 종횡비
+        const wantSide    = ar >= 1.22; // 넓게 → 오른쪽 텍스트
+        const wantOverlay = ar <= 1.15; // 세로로 좁게 → 카드 안 텍스트
+
+        // 히스테리시스: 경계 부근에서 깜빡임 방지
+        if (heroMode === 'side'    && !wantOverlay) return;
+        if (heroMode === 'overlay' && !wantSide)    return;
+
+        heroMode = wantSide ? 'side' : 'overlay';
+        heroEl.classList.toggle('mode-side',    heroMode === 'side');
+        heroEl.classList.toggle('mode-overlay', heroMode === 'overlay');
+      }
+
+      // 최초 1회 + 화면 변경에 반응
+      pickHeroMode();
+      window.addEventListener('resize', pickHeroMode, { passive: true });
+      window.addEventListener('orientationchange', pickHeroMode);
       };
       
       // 스크롤 이벤트에 체크 함수 바인딩
